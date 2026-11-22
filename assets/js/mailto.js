@@ -1,5 +1,5 @@
 export function initMailto() {
-  const link = document.getElementById('contact-email');
+  const link = document.getElementById('email-link');
   if (!link) return;
 
   const { u, d, t } = link.dataset;
@@ -7,5 +7,6 @@ export function initMailto() {
 
   const address = `${u}@${d}.${t}`;
   link.setAttribute('href', `mailto:${address}`);
-  link.setAttribute('aria-label', `Email Aditya (${address})`);
+  link.textContent = `${address.toUpperCase()} ↗`;
+  link.setAttribute('aria-label', `Email ${address}`);
 }

@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self' 'sha256-21olWK7GFDdTawCeWHBp2JD65xYPgIqRRUTa5D2buPc='"
+    />
     <title>Aditya Kumar Verma · Software Engineer</title>
     <meta
       name="description"
@@ -19,13 +23,10 @@
       property="og:description"
       content="Aditya Kumar Verma — full-stack engineer (Angular, .NET, AWS) and distance runner; builder of RunWithTheWind."
     />
-    <meta property="og:image" content="https://adikverma.github.io/assets/img/og-card.png" />
+    <meta property="og:image" content="https://adikverma.github.io/assets/img/og-card.png?v=20261122" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="Aditya Kumar Verma — Full-stack engineer, and distance runner."
-    />
+    <meta property="og:image:alt" content="Aditya Kumar Verma — Full-stack engineer and distance runner." />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -34,38 +35,37 @@
       name="twitter:description"
       content="Aditya Kumar Verma — full-stack engineer (Angular, .NET, AWS) and distance runner; builder of RunWithTheWind."
     />
-    <meta name="twitter:image" content="https://adikverma.github.io/assets/img/og-card.png" />
+    <meta name="twitter:image" content="https://adikverma.github.io/assets/img/og-card.png?v=20261122" />
 
-    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg?v=20261122" />
+
+    <!-- Preload critical fonts & first section image only -->
     <link
       rel="preload"
-      href="/assets/fonts/plus-jakarta-sans-var-latin.woff2"
+      href="/assets/fonts/inter-tight-var-latin.woff2?v=20261122"
       as="font"
       type="font/woff2"
       crossorigin
     />
+    <link
+      rel="preload"
+      href="/assets/fonts/jetbrains-mono-var-latin.woff2?v=20261122"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      imagesrcset="/assets/img/sections/about-sm.webp?v=20261122 960w, /assets/img/sections/about.webp?v=20261122 1200w"
+      imagesizes="(min-width: 900px) 58vw, 100vw"
+    />
 
-    <script>
-      (function () {
-        try {
-          var m = localStorage.getItem('theme-mode');
-          if (m === 'dark' || m === 'light') {
-            document.documentElement.setAttribute('data-theme', m);
-          }
-        } catch (e) {}
-      })();
-    </script>
+    <script>(function(){var d=document.documentElement;d.classList.add('js');try{var m=localStorage.getItem('theme-mode');if(m==='dark'||m==='light')d.setAttribute('data-theme',m);}catch(e){}})();</script>
 
-    <link rel="stylesheet" href="/assets/css/tokens.css" />
-    <link rel="stylesheet" href="/assets/css/home.css" />
-    <noscript>
-      <style>
-        #mode-toggle,
-        #contact-email {
-          display: none !important;
-        }
-      </style>
-    </noscript>
+    <link rel="stylesheet" href="/assets/css/tokens.css?v=20261122" />
+    <link rel="stylesheet" href="/assets/css/home.css?v=20261122" />
 
     <script type="application/ld+json">
       {
@@ -83,187 +83,451 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div id="live-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
 
-    <canvas id="wind-canvas" class="wind-canvas" aria-hidden="true"></canvas>
+    <main id="main" class="shell">
+      <div class="no-js-bar no-js-only">
+        <span>adityakumarv333 [at] gmail [dot] com</span>
+      </div>
 
-    <button
-      type="button"
-      id="mode-toggle"
-      class="mode-toggle"
-      aria-label="Color mode: System. Switch to Dark."
-      title="Theme: System"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="8" />
-        <path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none" />
-      </svg>
-    </button>
-    <span id="mode-status" class="sr-only" role="status" aria-live="polite"></span>
+      <!-- LEFT PANEL: Active Info Page (HERO) or Winding Course Visual (LIST) -->
+      <div class="panel panel-left">
+        <div class="left-viewport">
+          <div id="left-scroll" class="left-scroll">
+            <!-- 01 ABOUT -->
+            <article
+              id="about"
+              class="section-article"
+              data-category="About"
+              data-title="Aditya"
+              data-edge="ME"
+              data-focus="50% 28%"
+              data-tone="#19241a"
+            >
+              <figure class="section-media">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="/assets/img/sections/about-sm.webp?v=20261122 960w, /assets/img/sections/about.webp?v=20261122 1200w"
+                    sizes="(min-width: 900px) 58vw, 100vw"
+                  />
+                  <img
+                    src="/assets/img/sections/about.webp?v=20261122"
+                    width="1200"
+                    height="1608"
+                    fetchpriority="high"
+                    decoding="async"
+                    alt="Illustrated portrait of Aditya Kumar Verma outdoors by hills and a river"
+                  />
+                </picture>
+              </figure>
 
-    <main id="main" class="stage">
-      <div class="grid-canvas">
-        <!-- Left column: Headline + primary pills -->
-        <section class="col-headline" aria-labelledby="hero-heading">
-          <h1 id="hero-heading" class="headline">
-            <span class="headline-line">
-              <span class="word" style="--w: 0">Full-stack</span>
-              <span class="word" style="--w: 1">engineer,</span>
-            </span>
-            <span class="headline-line headline-line--accent">
-              <span class="word" style="--w: 2">and</span>
-              <span class="word" style="--w: 3">distance</span>
-              <span class="word" style="--w: 4">runner.</span>
-            </span>
-          </h1>
+              <h1 class="info-heading" tabindex="-1">Hello, I'm Aditya.</h1>
 
-          <div class="cta-row">
-            <a class="pill pill--primary" href="/runwiththewind/">
-              <span>Run with the Wind</span>
-              <span class="pill-arrow" aria-hidden="true">↗</span>
-            </a>
-            <a id="resume-link" class="pill" href="[[RESUME_PDF]]" hidden>
-              <span>Resume</span>
-            </a>
+              <dl class="info-list">
+                <div class="info-row">
+                  <dt class="info-label">Info</dt>
+                  <dd class="info-value">
+                    <p>
+                      Full-stack engineer at Verisk, building claims software with Angular, .NET
+                      and AWS. I run, and I'm building a Wear OS tracker for it.
+                    </p>
+                    <figure class="info-portrait">
+                      <picture>
+                        <source srcset="/assets/img/me.webp?v=20261122" type="image/webp" />
+                        <img
+                          src="/assets/img/me.jpg?v=20261122"
+                          width="180"
+                          height="220"
+                          decoding="async"
+                          alt="Portrait of Aditya Kumar Verma"
+                        />
+                      </picture>
+                    </figure>
+                  </dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Experience</dt>
+                  <dd class="info-value info-stack">
+                    <div class="info-entry">
+                      <span class="info-entry-meta">2024–26</span>
+                      <span>Verisk · Intern, Engineer I</span>
+                    </div>
+                    <div class="info-entry">
+                      <span class="info-entry-meta">2026–now</span>
+                      <span>Verisk · Engineer II</span>
+                    </div>
+                  </dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Recognition</dt>
+                  <dd class="info-value info-stack">
+                    <span>AWS Certified Cloud Practitioner (2025)</span>
+                    <span>AWS Certified AI Practitioner (2026)</span>
+                    <span>Verisk Way To Go Award (2025)</span>
+                  </dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Capabilities</dt>
+                  <dd class="info-value">
+                    <ul class="cap-grid">
+                      <li>Angular</li>
+                      <li>.NET</li>
+                      <li>AWS</li>
+                      <li>SQL Server</li>
+                      <li>Python</li>
+                      <li>Kotlin</li>
+                    </ul>
+                  </dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Elsewhere</dt>
+                  <dd class="info-value ext-links">
+                    <a
+                      class="ext-link"
+                      href="https://github.com/Adikverma"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span>GitHub</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                    <a
+                      class="ext-link"
+                      href="https://www.linkedin.com/in/adityakumarverma-1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span>LinkedIn</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- 02 APPLICATION: RUN WITH THE WIND -->
+            <article
+              id="run-with-the-wind"
+              class="section-article"
+              data-category="Application"
+              data-title="Run with the Wind"
+              data-edge="BUILDING"
+              data-focus="50% 50%"
+              data-tone="#24140e"
+            >
+              <figure class="section-media">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="/assets/img/sections/run-with-the-wind-sm.webp?v=20261122 960w, /assets/img/sections/run-with-the-wind.webp?v=20261122 1600w"
+                    sizes="(min-width: 900px) 58vw, 100vw"
+                  />
+                  <img
+                    src="/assets/img/sections/run-with-the-wind.webp?v=20261122"
+                    width="1600"
+                    height="1200"
+                    loading="lazy"
+                    fetchpriority="low"
+                    decoding="async"
+                    alt="Atmospheric dark ember backdrop for Run with the Wind"
+                  />
+                </picture>
+              </figure>
+
+              <div class="app-brand">
+                <picture>
+                  <source srcset="/assets/img/run-with-the-wind-logo.webp?v=20261122" type="image/webp" />
+                  <img
+                    class="app-logo"
+                    src="/assets/img/run-with-the-wind-logo.png?v=20261122"
+                    width="52"
+                    height="52"
+                    decoding="async"
+                    alt="Run with the Wind app icon"
+                  />
+                </picture>
+                <h2 class="info-heading" tabindex="-1">Run with the Wind</h2>
+              </div>
+
+              <dl class="info-list">
+                <div class="info-row">
+                  <dt class="info-label">Info</dt>
+                  <dd class="info-value">
+                    <p>
+                      A Wear OS run tracker with a phone companion. It records GPS, heart rate and
+                      pace on the watch and syncs to the phone automatically. Strava upload is
+                      next.
+                    </p>
+                  </dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Year</dt>
+                  <dd class="info-value">2026</dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Platform</dt>
+                  <dd class="info-value">Wear OS, Android</dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Stack</dt>
+                  <dd class="info-value">Kotlin, Jetpack Compose, Health Services, Room</dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Status</dt>
+                  <dd class="info-value">In development, personal project</dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Link</dt>
+                  <dd class="info-value">
+                    <a class="action-pill" href="/runwiththewind/">
+                      <span>Open the project page</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- 03 HOBBY: RUNNING -->
+            <article
+              id="running"
+              class="section-article"
+              data-category="Hobby"
+              data-title="Running"
+              data-edge="SINCE 2022"
+              data-focus="50% 62%"
+              data-tone="#141d17"
+            >
+              <figure class="section-media">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="/assets/img/sections/running-sm.webp?v=20261122 960w, /assets/img/sections/running.webp?v=20261122 1200w"
+                    sizes="(min-width: 900px) 58vw, 100vw"
+                  />
+                  <img
+                    src="/assets/img/sections/running.webp?v=20261122"
+                    width="1200"
+                    height="1600"
+                    loading="lazy"
+                    fetchpriority="low"
+                    decoding="async"
+                    alt="Runner walking along a shaded red running track lined with race banners"
+                  />
+                </picture>
+              </figure>
+
+              <h2 class="info-heading" tabindex="-1">Running</h2>
+
+              <dl class="info-list">
+                <div class="info-row">
+                  <dt class="info-label">Info</dt>
+                  <dd class="info-value">
+                    <p>Amateur distance runner.</p>
+                    <figure class="info-race-photo">
+                      <picture>
+                        <source srcset="/assets/img/running-race.webp?v=20261122" type="image/webp" />
+                        <img
+                          src="/assets/img/running-race.jpg?v=20261122"
+                          width="640"
+                          height="426"
+                          loading="lazy"
+                          decoding="async"
+                          alt="Aditya Kumar Verma running during a half marathon"
+                        />
+                      </picture>
+                    </figure>
+                  </dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Personal Bests</dt>
+                  <dd class="info-value">5K 18:05 · 10K 39:00 · Half marathon 1:24:39</dd>
+                </div>
+
+                <div class="info-row">
+                  <dt class="info-label">Race</dt>
+                  <dd class="info-value">
+                    NMDC Hyderabad Half Marathon 2026, 13th overall of 6,000+.
+                  </dd>
+                </div>
+              </dl>
+            </article>
+
+            <!-- 04 HOBBY: ART -->
+            <article
+              id="art"
+              class="section-article"
+              data-category="Hobby"
+              data-title="Art"
+              data-edge=""
+              data-focus="50% 50%"
+              data-tone="#151726"
+            >
+              <figure class="section-media">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="/assets/img/sections/art-sm.webp?v=20261122 960w, /assets/img/sections/art.webp?v=20261122 1600w"
+                    sizes="(min-width: 900px) 58vw, 100vw"
+                  />
+                  <img
+                    src="/assets/img/sections/art.webp?v=20261122"
+                    width="1600"
+                    height="1200"
+                    loading="lazy"
+                    fetchpriority="low"
+                    decoding="async"
+                    alt="Atmospheric indigo-slate backdrop for the Art section"
+                  />
+                </picture>
+              </figure>
+
+              <h2 class="info-heading" tabindex="-1">Art</h2>
+
+              <dl class="info-list">
+                <div class="info-row">
+                  <dt class="info-label">Info</dt>
+                  <dd class="info-value">
+                    <p>Secretary of the Fine Arts Club, 2022–23.</p>
+                  </dd>
+                </div>
+
+                <div class="info-row" data-placeholder="art-info" hidden>
+                  <dt class="info-label">Notes</dt>
+                  <dd class="info-value">[[ART_INFO]]</dd>
+                </div>
+              </dl>
+            </article>
           </div>
-        </section>
 
-        <!-- Center column: Arch portrait + one-shot SVG route loop -->
-        <div class="col-portrait">
-          <figure class="portrait-figure" tabindex="0">
-            <div class="portrait-arch">
-              <picture>
-                <source srcset="/assets/img/me.webp" type="image/webp" />
-                <img
-                  class="portrait-img"
-                  src="/assets/img/me.jpg"
-                  width="720"
-                  height="900"
-                  fetchpriority="high"
-                  decoding="async"
-                  alt="Portrait of Aditya Kumar Verma"
-                />
-              </picture>
-            </div>
+          <!-- Creative Course Visual (shown in LIST state) -->
+          <div id="course-layer" class="course-layer js-only" aria-hidden="true">
+            <canvas id="course-wind" class="course-wind" aria-hidden="true"></canvas>
 
             <svg
-              class="portrait-route"
-              viewBox="0 0 368 452"
-              aria-hidden="true"
-              focusable="false"
+              class="course-svg"
+              viewBox="0 0 320 250"
+              role="img"
+              aria-label="Running course progress across four sections"
             >
               <path
-                class="route-path"
-                pathLength="100"
-                d="M 10 296 L 10 184 A 174 174 0 0 1 358 184 L 358 412 C 358 434 340 444 316 444 L 54 444 C 24 444 12 428 12 392 C 12 368 24 352 38 342"
+                id="course-track"
+                class="course-track"
+                d="M 52 24 C 118 42, 118 76, 56 96 C 14 110, 22 152, 82 168 C 122 180, 116 212, 66 228"
               />
-              <circle class="route-dot" cx="38" cy="342" r="4" />
+              <path
+                id="course-progress"
+                class="course-progress"
+                d="M 52 24 C 118 42, 118 76, 56 96 C 14 110, 22 152, 82 168 C 122 180, 116 212, 66 228"
+              />
+              <g id="course-flags"></g>
+              <circle id="course-dot-halo" class="course-dot-halo" cx="52" cy="24" r="11" />
+              <circle id="course-dot" class="course-dot" cx="52" cy="24" r="5" />
             </svg>
 
-            <figcaption class="sr-only">Portrait of Aditya Kumar Verma</figcaption>
-          </figure>
+            <div class="course-counter" aria-hidden="true">
+              <span id="course-num" class="course-num">01</span>
+              <span class="course-total">/ 04</span>
+              <span class="course-unit">KM</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Right column: Three-line intro + contact pills -->
-        <section class="col-intro" aria-label="Introduction and contact">
-          <div class="intro-copy">
-            <p class="intro-lead">Hi, I'm Aditya</p>
-            <p>
-              Software Engineer II at Verisk. I build claims software with
-              Angular, .NET and AWS.
-            </p>
-            <p>
-              Off the clock I run half marathons (1:24:39) and build
-              RunWithTheWind, a Wear OS run tracker.
-            </p>
-          </div>
-
-          <div class="contact-row" aria-label="Contact links">
-            <a
-              id="contact-email"
-              class="pill pill--contact"
-              href="#contact-email"
-              data-u="adityakumarv333"
-              data-d="gmail"
-              data-t="com"
-              aria-label="Email Aditya"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <rect x="3" y="5" width="18" height="14" rx="2" />
-                <path d="m3 7 9 6 9-6" />
-              </svg>
-              <span class="contact-label">Email</span>
-            </a>
-
-            <noscript>
-              <span class="contact-fallback">adityakumarv333 [at] gmail [dot] com</span>
-            </noscript>
-
-            <a
-              class="pill pill--contact"
-              href="https://github.com/Adikverma"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.72 0 0 .84-.27 2.75 1.05A9.36 9.36 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.59.69.49A10.22 10.22 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"
-                />
-              </svg>
-              <span class="contact-label">GitHub</span>
-            </a>
-
-            <a
-              class="pill pill--contact"
-              href="https://www.linkedin.com/in/adityakumarverma-1"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M5.5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3.75 9.25h3.5v11.25h-3.5V9.25Zm6.25 0h3.35v1.54h.05c.47-.89 1.6-1.82 3.3-1.82 3.53 0 4.18 2.33 4.18 5.36v6.17h-3.5v-5.47c0-1.3-.03-2.98-1.82-2.98-1.82 0-2.1 1.42-2.1 2.88v5.57H10V9.25Z"
-                />
-              </svg>
-              <span class="contact-label">LinkedIn</span>
-            </a>
-          </div>
-        </section>
-
-        <!-- Honors: Right-edge bookmark tab on desktop, collapsed row on mobile -->
-        <details id="honors" class="honors">
-          <summary class="honors-tab">
-            <span class="honors-tab-text">Honors</span>
-          </summary>
-          <div class="honors-card">
-            <ul class="honors-list">
-              <li>AWS Certified Cloud Practitioner and AI Practitioner</li>
-              <li>Verisk Way To Go Award, 2025</li>
-              <li>
-                13th overall, NMDC Hyderabad Half Marathon 2026 (6,000+ runners)
-              </li>
-            </ul>
-          </div>
-        </details>
+        <div class="left-footer js-only">
+          <button type="button" id="invert-toggle" class="mono-btn" aria-pressed="false">
+            <span class="mono-btn-dot" aria-hidden="true"></span>
+            <span>Invert</span>
+          </button>
+        </div>
       </div>
+
+      <!-- RIGHT PANEL: Full-Bleed Hero / Vertical Card List + Selector Overlays -->
+      <section
+        id="panel-right"
+        class="panel panel-right js-only"
+        aria-label="Section showcase and navigator"
+      >
+        <a
+          id="email-link"
+          class="email-top"
+          href="#email-link"
+          data-u="adityakumarv333"
+          data-d="gmail"
+          data-t="com"
+          aria-label="Email Aditya"
+        >
+          Email ↗
+        </a>
+
+        <div id="stage-cards" class="stage-cards"></div>
+
+        <!-- Compact 1-line bar shown only when scrolled down on touch/mobile -->
+        <button
+          type="button"
+          id="compact-bar"
+          class="compact-bar"
+          aria-label="Expand section viewer"
+          aria-hidden="true"
+          tabindex="-1"
+        >
+          <span id="compact-idx" class="compact-idx">01</span>
+          <span id="compact-text" class="compact-text">About — Aditya</span>
+          <span class="compact-chevron" aria-hidden="true">▾</span>
+        </button>
+
+        <span id="edge-left" class="edge-label edge-left" aria-hidden="true">01</span>
+        <span id="edge-right" class="edge-label edge-right" aria-hidden="true">ME</span>
+
+        <div class="selector-wrap">
+          <div class="selector-grid" aria-hidden="false">
+            <div id="sel-prev" class="sel-row sel-row--neighbor" data-empty="true">
+              <button type="button" class="sel-cat" data-step="-1" tabindex="-1"></button>
+              <button type="button" class="sel-title" data-step="-1" tabindex="-1"></button>
+            </div>
+
+            <div class="tick-stack" aria-hidden="true">
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick tick--current"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+              <span class="tick"></span>
+            </div>
+
+            <div id="sel-curr" class="sel-row sel-row--current" data-empty="false">
+              <span class="sel-cat">About</span>
+              <span class="sel-title">Aditya</span>
+            </div>
+
+            <div id="sel-next" class="sel-row sel-row--neighbor" data-empty="false">
+              <button type="button" class="sel-cat" data-step="1" tabindex="-1">Application</button>
+              <button type="button" class="sel-title" data-step="1" tabindex="-1">Run with the Wind</button>
+            </div>
+          </div>
+        </div>
+
+        <span id="state-hint" class="stage-hint" aria-hidden="true">Scroll to browse</span>
+      </section>
     </main>
 
-    <script type="module" src="/assets/js/main.js"></script>
+    <script type="module" src="/assets/js/main.js?v=20261122"></script>
   </body>
 </html>

@@ -1,0 +1,65 @@
+export function createInfoController(sections, leftScroll, announce) {
+  let current = null;
+  let timer = 0;
+
+  sections.forEach((s) =>
+    s.article.querySelectorAll('[data-placeholder]').forEach((row) => {
+      if (row.textContent?.includes('[[')) row.hidden = true;
+    })
+  );
+
+  const applyTone = (s) => {
+    if (s?.tone) document.documentElement.style.setProperty('--tone', s.tone);
+  };
+
+  function setSection(index, opts = {}) {
+    const next = sections[index];
+    if (!next) return;
+    applyTone(next);
+
+    if (current && current !== next.article) {
+      const prev = current;
+      clearTimeout(timer);
+      prev.classList.remove('is-active', 'is-entering');
+      prev.setAttribute('aria-hidden', 'true');
+      prev.inert = true;
+      if (!opts.instant && !opts.reducedMotion) {
+        prev.classList.add('is-leaving');
+        timer = setTimeout(() => prev.classList.remove('is-leaving'), 260);
+      }
+    }
+
+    sections.forEach(({ article }) => {
+      if (article !== next.article && !article.classList.contains('is-leaving')) {
+        article.classList.remove('is-active', 'is-entering');
+        article.setAttribute('aria-hidden', 'true');
+        article.inert = true;
+      }
+    });
+
+    const el = next.article;
+    el.removeAttribute('aria-hidden');
+    el.inert = false;
+    el.classList.remove('is-leaving');
+    el.classList.add('is-active');
+    if (!opts.instant) {
+      el.classList.remove('is-entering');
+      void el.offsetWidth;
+      el.classList.add('is-entering');
+    }
+
+    leftScroll.scrollTop = 0;
+    current = el;
+    if (opts.focusHeading) el.querySelector('.info-heading')?.focus({ preventScroll: true });
+    if (opts.announce) announce(`Showing: ${next.title}`);
+  }
+
+  return {
+    setSection,
+    applyTone,
+    setListVisibility(isList) {
+      leftScroll.inert = isList;
+      leftScroll.setAttribute('aria-hidden', String(isList));
+    },
+  };
+}
