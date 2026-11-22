@@ -7,7 +7,6 @@ import { createRenderLoop } from './render-loop.js';
 import { initInput } from './input.js';
 
 const guard = (fn) => { try { return fn(); } catch { return null; } };
-
 document.documentElement.classList.add('is-app');
 guard(initMode);
 guard(initMailto);
@@ -17,25 +16,14 @@ guard(() => {
   const leftScroll = $('left-scroll'), rightPanel = $('panel-right'), stageCards = $('stage-cards'), courseLayer = $('course-layer');
   if (!leftScroll || !rightPanel || !stageCards || !courseLayer) return;
 
-  const sections = [...leftScroll.querySelectorAll('.section-article')].map((article, index) => ({
-    index,
-    id: article.id,
-    category: article.dataset.category || '',
-    title: article.dataset.title || '',
-    edge: article.dataset.edge || '',
-    focus: article.dataset.focus || '50% 50%',
-    tone: article.dataset.tone || '#19241a',
-    article,
-    media: article.querySelector('.section-media'),
-  }));
+  const sections = [...leftScroll.querySelectorAll('.section-article')].map((article, index) => {
+    const d = article.dataset;
+    return { index, id: article.id, category: d.category || '', title: d.title || '', edge: d.edge || '', focus: d.focus || '50% 50%', tone: d.tone || '#19241a', article, media: article.querySelector('.section-media') };
+  });
   if (!sections.length) return;
 
   const live = $('live-announcer');
-  const announce = (msg) => {
-    if (!live) return;
-    live.textContent = '';
-    requestAnimationFrame(() => { live.textContent = msg; });
-  };
+  const announce = (msg) => { if (live) { live.textContent = ''; requestAnimationFrame(() => { live.textContent = msg; }); } };
 
   const store = createState(sections);
   const info = createInfoController(sections, leftScroll, announce);
