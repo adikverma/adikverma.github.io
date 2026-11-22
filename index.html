@@ -237,20 +237,7 @@
                 </picture>
               </figure>
 
-              <div class="app-brand">
-                <picture>
-                  <source srcset="/assets/img/run-with-the-wind-logo.webp?v=20261122" type="image/webp" />
-                  <img
-                    class="app-logo"
-                    src="/assets/img/run-with-the-wind-logo.png?v=20261122"
-                    width="72"
-                    height="72"
-                    decoding="async"
-                    alt="Run with the Wind app icon"
-                  />
-                </picture>
-                <h2 class="info-heading" tabindex="-1">Run with the Wind</h2>
-              </div>
+              <h2 class="info-heading" tabindex="-1">Run with the Wind</h2>
 
               <dl class="info-list">
                 <div class="info-row">
@@ -288,7 +275,19 @@
                   <dt class="info-label">Link</dt>
                   <dd class="info-value">
                     <a class="action-pill" href="/runwiththewind/">
-                      <span>Open the project page</span>
+                      <picture>
+                        <source srcset="/assets/img/run-with-the-wind-logo.webp?v=20261122" type="image/webp" />
+                        <img
+                          class="action-pill-icon"
+                          src="/assets/img/run-with-the-wind-logo.png?v=20261122"
+                          width="24"
+                          height="24"
+                          decoding="async"
+                          alt=""
+                          aria-hidden="true"
+                        />
+                      </picture>
+                      <span>Project page</span>
                       <span aria-hidden="true">↗</span>
                     </a>
                   </dd>
@@ -484,16 +483,15 @@
           tabindex="-1"
         >
           <span id="compact-idx" class="compact-idx">01</span>
-          <span id="compact-text" class="compact-text">Namaste — About Me</span>
+          <span id="compact-text" class="compact-text">Namaste</span>
           <span class="compact-chevron" aria-hidden="true">▾</span>
         </button>
 
+        <span id="edge-left" class="edge-label edge-left" aria-hidden="true">01</span>
+        <span id="edge-right" class="edge-label edge-right" aria-hidden="true">NAMASTE</span>
+
         <div class="selector-wrap">
-          <div class="meter-stage">
-            <span id="edge-left" class="edge-label edge-left" aria-hidden="true">01</span>
-            <div id="meter-wheel" class="meter-wheel"></div>
-            <span id="edge-right" class="edge-label edge-right" aria-hidden="true">NAMASTE</span>
-          </div>
+          <div id="meter-wheel" class="meter-wheel"></div>
         </div>
 
         <span id="state-hint" class="stage-hint" aria-hidden="true">Scroll to browse</span>

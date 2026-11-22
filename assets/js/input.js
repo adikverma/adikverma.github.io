@@ -6,7 +6,7 @@ export function initInput({ rightPanel: rp, leftScroll: ls, store, shell, compac
   const expandTop = () => shell.scrollTo({ top: 0, behavior: s.reducedMotion ? 'auto' : 'smooth' });
 
   const syncCollapse = () => {
-    const p = mq.matches && s.mode === 'hero' ? max(0, min(1, shell.scrollTop / max(1, rp.offsetHeight - 58))) : 0;
+    const p = mq.matches && s.mode === 'hero' ? max(0, min(1, shell.scrollTop / max(1, rp.offsetHeight - 46))) : 0;
     rp.style.setProperty('--cp', p.toFixed(3));
     const c = p > 0.85;
     shell.classList.toggle('is-top-compact', c);

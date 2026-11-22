@@ -7,7 +7,6 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
 
   if (wheel) {
     const addBar = (v) => { const b = document.createElement('span'); b.className = 'meter-bar'; wheel.append(b); bars.push({ el: b, v }); };
-    addBar(-0.72); addBar(-0.5); addBar(-0.28);
     s.sections.forEach((sec, i) => {
       const btn = document.createElement('button');
       btn.type = 'button'; btn.className = 'meter-item'; btn.tabIndex = -1; btn.textContent = sec.title;
@@ -16,10 +15,8 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
         s.mode === 'hero' ? (i === s.activeIndex ? store.enterList() : store.openSection(i)) : (i === s.targetIndex ? store.openSection(i) : store.jumpList(i));
       });
       wheel.append(btn); items.push({ el: btn, v: i });
-      if (i < s.sections.length - 1) { addBar(i + 0.28); addBar(i + 0.5); addBar(i + 0.72); }
+      if (i < s.sections.length - 1) { addBar(i + 0.3); addBar(i + 0.5); addBar(i + 0.7); }
     });
-    const lastV = s.sections.length - 1;
-    addBar(lastV + 0.28); addBar(lastV + 0.5); addBar(lastV + 0.72);
   }
 
   const cards = s.sections.map((sec, i) => {
@@ -41,7 +38,7 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
     if (edgeL) edgeL.textContent = num;
     if (edgeR) edgeR.textContent = cur.category.toUpperCase();
     if (cIdx) cIdx.textContent = num;
-    if (cTxt) cTxt.textContent = `${cur.category} — ${cur.title}`;
+    if (cTxt) cTxt.textContent = cur.category;
     if (s.mode === 'list') info.applyTone(cur);
   };
 
@@ -57,11 +54,10 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
       it.el.classList.toggle('is-center', f > 0.5);
     }
     for (const b of bars) {
-      const dy = (b.v - pos) * step, g = max(0, 1 - abs(dy) / 92), st = b.el.style;
-      if (g <= 0.01) { st.opacity = '0'; continue; }
-      st.width = `${(5 + 21 * g).toFixed(1)}px`;
+      const dy = (b.v - pos) * step, fade = max(0, 1 - abs(dy) / 88), st = b.el.style;
+      if (fade <= 0.01) { st.opacity = '0'; continue; }
       st.transform = `translate3d(-50%,calc(-50% + ${dy.toFixed(2)}px),0)`;
-      st.opacity = (g * (0.68 + 0.28 * mix)).toFixed(3);
+      st.opacity = (fade * fade * (0.58 + 0.34 * mix)).toFixed(3);
     }
   };
 

@@ -170,7 +170,7 @@ html:not(.js) .section-media img {
 
 .info-row {
   display: grid;
-  grid-template-columns: minmax(96px, 32%) 1fr;
+  grid-template-columns: minmax(80px, 28%) 1fr;
   gap: 0.75rem 1.25rem;
   padding: 1rem 0;
   border-top: 1px solid var(--hairline);
@@ -264,27 +264,6 @@ html:not(.js) .section-media img {
   display: block;
 }
 
-.app-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.9rem;
-  margin-bottom: clamp(1.4rem, 2.8vh, 2rem);
-}
-
-.app-logo {
-  width: 72px;
-  height: 72px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  flex-shrink: 0;
-  display: block;
-}
-
-.app-brand .info-heading {
-  margin: 0;
-}
-
 .cap-grid {
   list-style: none;
   margin: 0;
@@ -318,9 +297,9 @@ html:not(.js) .section-media img {
 .action-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   min-height: var(--tap-min);
-  padding: 0 1.15rem;
+  padding: 0 1.05rem 0 0.5rem;
   border-radius: 9999px;
   border: 1px solid var(--border-strong);
   background: var(--panel-elevated);
@@ -328,6 +307,19 @@ html:not(.js) .section-media img {
   font-weight: 500;
   color: var(--text-primary);
   transition: transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.action-pill picture {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.action-pill-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 .action-pill:hover {
@@ -372,11 +364,11 @@ html.js .panel {
   min-height: 0;
 }
 
-/* Desktop >= 900px: left 41.5% / right 58.5% */
+/* Desktop >= 900px: left 48% / right 52% */
 @media (min-width: 900px) {
   html.js .shell {
     display: grid;
-    grid-template-columns: 41.5% minmax(0, 1fr);
+    grid-template-columns: 48% minmax(0, 1fr);
     grid-template-rows: 1fr;
   }
 
@@ -445,7 +437,6 @@ html.js .section-article.is-leaving {
 }
 
 html.js .section-article.is-entering .info-heading,
-html.js .section-article.is-entering .app-brand,
 html.js .section-article.is-entering .info-row {
   animation: infoIn var(--dur-info-in) var(--ease-out) both;
 }
@@ -646,8 +637,9 @@ html.js .section-article.is-entering .info-row:nth-child(6) { animation-delay: 2
 /* =========================================================================
    RIGHT PANEL: FULL-BLEED HERO / VERTICAL CARD LIST + OVERLAYS
    ========================================================================= */
-html.js .panel-right {
+html.js .panel.panel-right {
   background: #070707;
+  background-color: #070707;
   touch-action: none;
   user-select: none;
 }
@@ -656,6 +648,7 @@ html.js .panel-right {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  background: #070707;
 }
 
 .card-item {
@@ -699,7 +692,7 @@ html.js .panel-right {
   pointer-events: none;
 }
 
-/* Compact 1-entry bar pinned to bottom 58px of sticky top panel on mobile/tablet */
+/* Compact 1-entry bar pinned to bottom 54px of sticky top panel on mobile/tablet */
 .compact-bar {
   display: none;
 }
@@ -712,16 +705,14 @@ html.js .panel-right {
     bottom: 0;
     z-index: 25;
     width: 100%;
-    height: 58px;
+    height: 54px;
     padding: 0 1.1rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    background: rgba(7, 7, 7, 0.56);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    gap: 0.7rem;
+    background: #070707;
     color: var(--overlay-primary);
-    opacity: clamp(0, calc((var(--cp, 0) - 0.52) / 0.48), 1);
+    opacity: clamp(0, calc((var(--cp, 0) - 0.55) / 0.45), 1);
     pointer-events: none;
     cursor: pointer;
   }
@@ -735,8 +726,11 @@ html.js .panel-right {
   }
 
   .compact-text {
-    font-size: 0.92rem;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--overlay-primary);
     text-align: left;
     flex: 1 1 auto;
@@ -750,6 +744,10 @@ html.js .panel-right {
     font-size: 0.8rem;
     color: var(--overlay-secondary);
     flex-shrink: 0;
+  }
+
+  .panel-right .stage-cards {
+    opacity: clamp(0, calc(1 - var(--cp, 0) * 1.15), 1);
   }
 
   .panel-right .email-top,
@@ -794,27 +792,12 @@ html.js .panel-right {
   opacity: 0.82;
 }
 
-/* Unified centered moving meter with flanking edge labels */
-.selector-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 16;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2.25rem 1.25rem;
-  pointer-events: none;
-}
-
-.meter-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
-  column-gap: clamp(0.8rem, 2.2vw, 1.75rem);
-  width: min(100%, 440px);
-}
-
+/* Extreme-edge labels (left: 01..04, right: NAMASTE / PROJECT / HOBBY) */
 .edge-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   line-height: 1.25;
@@ -825,20 +808,32 @@ html.js .panel-right {
   pointer-events: none;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
   white-space: nowrap;
-  will-change: transform, opacity;
 }
 
 .edge-left {
-  text-align: right;
+  left: clamp(0.85rem, 2.2vw, 1.75rem);
 }
 
 .edge-right {
-  text-align: left;
+  right: clamp(0.85rem, 2.2vw, 1.75rem);
+  text-align: right;
+}
+
+/* Centered moving meter wheel with uniform-width horizontal bars */
+.selector-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.25rem 3.5rem;
+  pointer-events: none;
 }
 
 .meter-wheel {
   position: relative;
-  width: clamp(180px, 24vw, 224px);
+  width: clamp(190px, 28vw, 240px);
   height: 184px;
   overflow: hidden;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.78);
@@ -869,11 +864,12 @@ html.js .panel-right {
   position: absolute;
   left: 50%;
   top: 50%;
+  width: 14px;
   height: 1px;
   border-radius: 1px;
   background: var(--overlay-primary);
   pointer-events: none;
-  will-change: transform, width, opacity;
+  will-change: transform, opacity;
 }
 
 /* Bottom state hint on the scroll screen */
@@ -895,10 +891,13 @@ html.js .panel-right {
   transition: opacity 200ms var(--ease-out);
 }
 
-/* Mobile / Tablet (< 900px): placed AFTER desktop panel rules so sticky native scroll wins cascade */
+/* Mobile / Tablet (< 900px): docked slim common footer + smooth sticky showcase collapse */
 @media (max-width: 899px) {
   html.js .shell {
     --mob-hero-h: max(46dvh, 270px);
+    --mob-foot-h: 34px;
+    height: calc(100dvh - var(--mob-foot-h) - var(--frame-pad) * 2 - env(safe-area-inset-bottom, 0px));
+    padding: 0 calc(var(--frame-pad) + env(safe-area-inset-right, 0px)) var(--frame-pad) calc(var(--frame-pad) + env(safe-area-inset-left, 0px));
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -913,10 +912,12 @@ html.js .panel-right {
   html.js .panel-right {
     order: 1;
     flex: 0 0 auto;
+    margin-top: calc(var(--frame-pad) + env(safe-area-inset-top, 0px));
     height: var(--mob-hero-h);
     position: sticky;
-    top: calc(58px - var(--mob-hero-h));
+    top: calc(54px - var(--mob-hero-h));
     z-index: 20;
+    background-color: #070707;
   }
 
   html.js .panel-left {
@@ -924,7 +925,7 @@ html.js .panel-right {
     flex: 1 0 auto;
     overflow: visible;
     z-index: 1;
-    min-height: calc(100dvh - 74px);
+    min-height: calc(100% - 62px);
   }
 
   html.js .left-viewport {
@@ -967,13 +968,21 @@ html.js .panel-right {
     overflow: hidden;
   }
 
-  .left-footer {
-    padding: 0.15rem 1rem;
-    border-radius: 0 0 var(--panel-radius) var(--panel-radius);
+  html.js .left-footer {
+    position: fixed;
+    left: calc(var(--frame-pad) + env(safe-area-inset-left, 0px));
+    right: calc(var(--frame-pad) + env(safe-area-inset-right, 0px));
+    bottom: calc(var(--frame-pad) + env(safe-area-inset-bottom, 0px));
+    height: 34px;
+    z-index: 30;
+    padding: 0 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--panel-bg);
   }
 
   .theme-btn {
-    min-height: 28px;
+    min-height: 30px;
   }
 
   .info-row {
@@ -985,11 +994,6 @@ html.js .panel-right {
   .info-portrait {
     width: 140px;
     height: 172px;
-  }
-
-  .app-logo {
-    width: 64px;
-    height: 64px;
   }
 
   .course-layer {
@@ -1020,16 +1024,11 @@ html.js .panel-right {
   }
 
   .selector-wrap {
-    padding: 2rem 0.9rem;
-  }
-
-  .meter-stage {
-    column-gap: 0.6rem;
-    width: min(100%, 370px);
+    padding: 2rem 3.2rem;
   }
 
   .meter-wheel {
-    width: min(56vw, 194px);
+    width: min(56vw, 196px);
     height: 158px;
   }
 
@@ -1048,7 +1047,6 @@ html.js .panel-right {
   }
 
   html.js .section-article.is-entering .info-heading,
-  html.js .section-article.is-entering .app-brand,
   html.js .section-article.is-entering .info-row {
     animation: fadeOnly 150ms linear both;
     animation-delay: 0ms;
