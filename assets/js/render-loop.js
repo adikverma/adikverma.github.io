@@ -6,8 +6,8 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
   let pw = 1, ph = 1, raf = 0, lastT = 0, lastIdx = -1, rt = 0;
 
   if (wheel) {
-    const addBar = (v, mid) => { const b = document.createElement('span'); b.className = 'meter-bar'; wheel.append(b); bars.push({ el: b, v, mid }); };
-    addBar(-0.5, 1); addBar(-0.3, 0);
+    const addBar = (v) => { const b = document.createElement('span'); b.className = 'meter-bar'; wheel.append(b); bars.push({ el: b, v }); };
+    addBar(-0.72); addBar(-0.5); addBar(-0.28);
     s.sections.forEach((sec, i) => {
       const btn = document.createElement('button');
       btn.type = 'button'; btn.className = 'meter-item'; btn.tabIndex = -1; btn.textContent = sec.title;
@@ -16,10 +16,10 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
         s.mode === 'hero' ? (i === s.activeIndex ? store.enterList() : store.openSection(i)) : (i === s.targetIndex ? store.openSection(i) : store.jumpList(i));
       });
       wheel.append(btn); items.push({ el: btn, v: i });
-      if (i < s.sections.length - 1) { addBar(i + 0.3, 0); addBar(i + 0.5, 1); addBar(i + 0.7, 0); }
+      if (i < s.sections.length - 1) { addBar(i + 0.28); addBar(i + 0.5); addBar(i + 0.72); }
     });
     const lastV = s.sections.length - 1;
-    addBar(lastV + 0.3, 0); addBar(lastV + 0.5, 1);
+    addBar(lastV + 0.28); addBar(lastV + 0.5); addBar(lastV + 0.72);
   }
 
   const cards = s.sections.map((sec, i) => {
@@ -46,9 +46,7 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
   };
 
   const renderMeter = (pos, mix) => {
-    const step = 62 - 14 * mix, base = 0.42 + 0.22 * mix, eOp = (0.78 + 0.22 * mix).toFixed(3), ex = (10 * mix).toFixed(1);
-    if (edgeL) { edgeL.style.transform = `translate3d(${ex}px,0,0)`; edgeL.style.opacity = eOp; }
-    if (edgeR) { edgeR.style.transform = `translate3d(-${ex}px,0,0)`; edgeR.style.opacity = eOp; }
+    const step = 62 - 14 * mix, base = 0.42 + 0.22 * mix;
     for (const it of items) {
       const dy = (it.v - pos) * step, fade = max(0, 1 - abs(dy) / 94), st = it.el.style;
       if (fade <= 0.01) { st.opacity = '0'; st.pointerEvents = 'none'; continue; }
@@ -59,12 +57,11 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
       it.el.classList.toggle('is-center', f > 0.5);
     }
     for (const b of bars) {
-      const dy = (b.v - pos) * step, fade = max(0, 1 - abs(dy) / 90), st = b.el.style;
-      if (fade <= 0.01) { st.opacity = '0'; continue; }
-      const f = max(0, 1 - abs(b.v - pos) / 0.75);
-      st.width = `${((b.mid ? 15 : 8) + 9 * f).toFixed(1)}px`;
+      const dy = (b.v - pos) * step, g = max(0, 1 - abs(dy) / 92), st = b.el.style;
+      if (g <= 0.01) { st.opacity = '0'; continue; }
+      st.width = `${(5 + 21 * g).toFixed(1)}px`;
       st.transform = `translate3d(-50%,calc(-50% + ${dy.toFixed(2)}px),0)`;
-      st.opacity = (fade * (0.46 + 0.18 * mix + 0.34 * f)).toFixed(3);
+      st.opacity = (g * (0.68 + 0.28 * mix)).toFixed(3);
     }
   };
 

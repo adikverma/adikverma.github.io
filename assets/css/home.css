@@ -810,8 +810,8 @@ html.js .panel-right {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  column-gap: clamp(0.85rem, 2.4vw, 1.85rem);
-  width: min(100%, 420px);
+  column-gap: clamp(0.8rem, 2.2vw, 1.75rem);
+  width: min(100%, 440px);
 }
 
 .edge-label {
@@ -838,7 +838,7 @@ html.js .panel-right {
 
 .meter-wheel {
   position: relative;
-  width: clamp(165px, 24vw, 215px);
+  width: clamp(180px, 24vw, 224px);
   height: 184px;
   overflow: hidden;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.78);
@@ -848,7 +848,7 @@ html.js .panel-right {
   position: absolute;
   left: 50%;
   top: 50%;
-  padding: 4px 8px;
+  padding: 4px;
   font-family: var(--font-sans);
   font-size: clamp(0.95rem, 1.38vw, 1.1rem);
   font-weight: 400;
@@ -924,7 +924,7 @@ html.js .panel-right {
     flex: 1 0 auto;
     overflow: visible;
     z-index: 1;
-    min-height: calc(100dvh - var(--mob-hero-h) - 24px);
+    min-height: calc(100dvh - 74px);
   }
 
   html.js .left-viewport {
@@ -969,6 +969,7 @@ html.js .panel-right {
 
   .left-footer {
     padding: 0.15rem 1rem;
+    border-radius: 0 0 var(--panel-radius) var(--panel-radius);
   }
 
   .theme-btn {
@@ -1023,12 +1024,12 @@ html.js .panel-right {
   }
 
   .meter-stage {
-    column-gap: 0.65rem;
-    width: min(100%, 350px);
+    column-gap: 0.6rem;
+    width: min(100%, 370px);
   }
 
   .meter-wheel {
-    width: 162px;
+    width: min(56vw, 194px);
     height: 158px;
   }
 
