@@ -1,12 +1,10 @@
 export function initMailto() {
-  const link = document.getElementById('email-link');
-  if (!link) return;
-
-  const { u, d, t } = link.dataset;
+  const el = document.getElementById('email-link');
+  if (!el) return;
+  const { u, d, t } = el.dataset;
   if (!u || !d || !t) return;
-
-  const address = `${u}@${d}.${t}`;
-  link.setAttribute('href', `mailto:${address}`);
-  link.textContent = `${address.toUpperCase()} ↗`;
-  link.setAttribute('aria-label', `Email ${address}`);
+  const a = `${u}@${d}.${t}`;
+  el.href = `mailto:${a}`;
+  el.textContent = `${a.toUpperCase()} ↗`;
+  el.setAttribute('aria-label', `Email ${a}`);
 }

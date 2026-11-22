@@ -1,23 +1,23 @@
-const KEY = 'theme-mode', root = document.documentElement, mq = matchMedia?.('(prefers-color-scheme: light)');
-const theme = () => { const t = root.getAttribute('data-theme'); return t === 'light' || t === 'dark' ? t : mq?.matches ? 'light' : 'dark'; };
+const KEY = 'theme-mode', root = document.documentElement;
+const isLight = () => root.getAttribute('data-theme') === 'light';
 
 export function initMode() {
-  const btn = document.getElementById('invert-toggle');
-  if (!btn) return;
+  const btn = document.getElementById('theme-toggle');
+  const lbl = document.getElementById('theme-label');
+  if (!btn || !lbl) return;
+
   const sync = () => {
-    const light = theme() === 'light';
-    btn.setAttribute('aria-pressed', String(light));
-    btn.setAttribute('aria-label', `Invert color theme (currently ${light ? 'light' : 'dark'})`);
+    const light = isLight();
+    lbl.textContent = light ? 'Dark' : 'Light';
+    btn.setAttribute('aria-label', `Switch to ${light ? 'dark' : 'light'} mode`);
   };
+
   sync();
   btn.addEventListener('click', () => {
-    const next = theme() === 'light' ? 'dark' : 'light';
+    const next = isLight() ? 'dark' : 'light';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem(KEY, next); } catch {}
     sync();
     dispatchEvent(new CustomEvent('themechange', { detail: next }));
-  });
-  mq?.addEventListener?.('change', () => {
-    if (!root.getAttribute('data-theme')) { sync(); dispatchEvent(new CustomEvent('themechange', { detail: theme() })); }
   });
 }

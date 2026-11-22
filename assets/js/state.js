@@ -1,49 +1,32 @@
 export function createState(sections) {
-  const subs = new Set(), rm = matchMedia?.('(prefers-reduced-motion: reduce)');
-  const clamp = (i) => Math.max(0, Math.min(sections.length - 1, i));
-  const fromHash = () => {
-    const h = (location.hash || '').slice(1).trim().toLowerCase();
-    const i = sections.findIndex((s) => s.id === h);
-    return i >= 0 ? i : 0;
-  };
-  const init = fromHash();
-  const state = { sections, mode: 'hero', targetIndex: init, activeIndex: init, position: init, listMix: 0, targetListMix: 0, reducedMotion: Boolean(rm?.matches) };
-  const emit = (r) => subs.forEach((fn) => fn(state, r));
-  const syncHash = (i) => {
-    const h = `#${sections[i].id}`;
-    if (location.hash !== h) try { history.replaceState(null, '', h); } catch {}
-  };
-  const enterList = () => {
-    if (state.mode === 'list') return false;
-    state.mode = 'list'; state.targetListMix = 1; emit('mode'); return true;
-  };
+  const subs = new Set(), rm = matchMedia?.('(prefers-reduced-motion: reduce)'), clamp = (i) => Math.max(0, Math.min(sections.length - 1, i));
+  const fromHash = () => Math.max(0, sections.findIndex((s) => s.id === (location.hash || '').slice(1).trim().toLowerCase()));
+  const init = fromHash(), s = { sections, mode: 'hero', targetIndex: init, activeIndex: init, position: init, listMix: 0, targetListMix: 0, reducedMotion: Boolean(rm?.matches) };
+  const emit = (r) => subs.forEach((fn) => fn(s, r));
+  const syncHash = (i) => { const h = `#${sections[i].id}`; if (location.hash !== h) try { history.replaceState(null, '', h); } catch {} };
+  const enterList = () => (s.mode === 'list' ? false : ((s.mode = 'list'), (s.targetListMix = 1), emit('mode'), true));
   const openSection = (i, o = {}) => {
-    const next = clamp(i), changed = next !== state.activeIndex, wasList = state.mode === 'list';
-    state.mode = 'hero'; state.targetIndex = state.activeIndex = next; state.targetListMix = 0;
-    if (o.instant || state.reducedMotion) { state.position = next; state.listMix = 0; }
-    if (!o.fromHash) syncHash(next);
-    emit(changed ? 'open-section' : wasList ? 'mode' : 'focus-section');
+    const n = clamp(i), ch = n !== s.activeIndex, was = s.mode === 'list';
+    s.mode = 'hero'; s.targetIndex = s.activeIndex = n; s.targetListMix = 0;
+    if (o.instant || s.reducedMotion) { s.position = n; s.listMix = 0; }
+    if (!o.fromHash) syncHash(n);
+    emit(ch ? 'open-section' : was ? 'mode' : 'focus-section');
   };
   const stepList = (d) => {
-    if (state.mode === 'hero') return enterList();
-    const next = clamp(state.targetIndex + d);
-    if (next === state.targetIndex) return false;
-    state.targetIndex = next;
-    if (state.reducedMotion) state.position = next;
+    if (s.mode === 'hero') return enterList();
+    const n = clamp(s.targetIndex + d);
+    if (n === s.targetIndex) return false;
+    s.targetIndex = n; if (s.reducedMotion) s.position = n;
     emit('step'); return true;
   };
   const jumpList = (i) => {
-    const next = clamp(i), wasHero = state.mode === 'hero';
-    state.mode = 'list'; state.targetListMix = 1;
-    if (next === state.targetIndex && !wasHero) return false;
-    state.targetIndex = next;
-    if (state.reducedMotion) { state.position = next; state.listMix = 1; }
+    const n = clamp(i), was = s.mode === 'hero';
+    s.mode = 'list'; s.targetListMix = 1;
+    if (n === s.targetIndex && !was) return false;
+    s.targetIndex = n; if (s.reducedMotion) { s.position = n; s.listMix = 1; }
     emit('step'); return true;
   };
   addEventListener('hashchange', () => openSection(fromHash(), { fromHash: true }));
-  rm?.addEventListener?.('change', (e) => {
-    state.reducedMotion = e.matches;
-    if (e.matches) { state.position = state.targetIndex; state.listMix = state.targetListMix; emit('reduced-motion'); }
-  });
-  return { state, subscribe: (fn) => (subs.add(fn), () => subs.delete(fn)), enterList, openSection, stepList, jumpList };
+  rm?.addEventListener?.('change', (e) => { s.reducedMotion = e.matches; if (e.matches) { s.position = s.targetIndex; s.listMix = s.targetListMix; emit('reduced-motion'); } });
+  return { state: s, subscribe: (fn) => (subs.add(fn), () => subs.delete(fn)), enterList, openSection, stepList, jumpList };
 }

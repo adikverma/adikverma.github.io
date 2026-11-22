@@ -8,11 +8,11 @@ This document specifies the layout grid, two-state machine, gesture normalizatio
 
 - **Outer frame:** `100dvh` fixed viewport (`overscroll-behavior: none`), `8px` outer padding (plus `env(safe-area-inset-*)`), `8px` gap between panels, `14px` corner radius on both panels, `1px` hairline panel borders.
 - **Desktop (`≥ 900px`):** Two side-by-side panels (`grid-template-columns: 41.5% minmax(0, 1fr)`).
-  - Left panel (`41.5%`): active section info page (independently scrollable) or the winding running-course visual (in LIST state), with a quiet bottom bar (`INVERT` left).
-  - Right panel (`58.5%`): full-bleed hero image or vertical card stack, top-right email link, left/right edge labels (`ME` / `BUILDING` / `SINCE 2022`), centered 3-row title selector with vertical tick stack, and bottom-center state hint (`SCROLL TO BROWSE` / `CLICK A CARD TO OPEN`).
-- **Touch / Mobile & Tablet (`< 900px`):** Flex-column stacked layout where the top showcase panel participates in the reading flow.
-  - At rest in HERO or LIST, the top panel occupies `48dvh` (`touch-action: none`) for swipe browsing and tapping cards, while the info panel scrolls below (`touch-action: pan-y`).
-  - Scrolling down through the info section smoothly shrinks the top panel to a compact single-entry bar (`58px`, e.g. `01 About — Aditya ▾`). Scrolling back to the top, pulling down at the top, or tapping the compact bar expands it back to full size.
+  - Left panel (`41.5%`): active section info page (independently scrollable) or the gentle running-course visual (in LIST state), with a single minimal theme toggle (`Light` with sun icon in default dark mode; `Dark` with half-moon icon in light mode).
+  - Right panel (`58.5%`): full-bleed hero image or vertical card stack, top-right email link, left edge index (`01..04`), right edge category (`ABOUT` / `PROJECT` / `HOBBY`), dead-center scrolling item & bar meter, and bottom-center state hint (`SCROLL TO BROWSE` / `CLICK A CARD TO OPEN`).
+- **Touch / Mobile & Tablet (`< 900px`):** Native scroll-linked sticky layout where the top showcase panel glides smoothly upward with the info section.
+  - At rest in HERO, the top panel occupies `max(46dvh, 270px)` (`touch-action: none`) for swipe browsing while the info section flows naturally below inside the scrolling shell.
+  - Scrolling down smoothly pushes the top panel upward pixel-for-pixel until its bottom `58px` pins at the top (`position: sticky`), cross-fading into a single-entry bar (e.g. `01 About — Aditya ▾`). Scrolling back up or tapping the bar smoothly glides it back open. In LIST state, the viewport locks to `100dvh` so cards and course stay framed.
 
 **Rationale:** Keeping the viewport fixed on desktop isolates section browsing (right panel) from reading long-form metadata (left panel) while maintaining the exact same two-state mental model on touch screens.
 
@@ -94,12 +94,12 @@ Two self-hosted Latin-subset WOFF2 fonts (`font-display: swap`, preloaded):
 ## 6. Component Specifications & States
 
 - **Info Rows:** Two-column grid (`minmax(96px, 32%) 1fr`), `1px` top hairline border, mono uppercase label left, grotesque value right. Portrait (`180×220`, `10px` radius) and race photo (`10px` radius) sit inline within their `INFO` values.
-- **Title Selector & Tick Stack:** Three rows (`previous / CURRENT / next`) flanking a 13-tick vertical column (`8px` ticks at 45% white; center tick `22px × 2px` in `--accent`). Title column uses extra width (`minmax(0, 0.76fr) 24px minmax(0, 1.24fr)`) with normal wrapping so multi-word titles (`Run with the Wind`) never truncate. Edge-right labels (`ME`, `BUILDING`, `SINCE 2022`) wrap cleanly on narrow screens.
+- **Unified Moving Item Meter & Edge Labels:** A compact centered row flanks the vertical item wheel (`About Me`, `Run with the Wind`, `Running`, `Art`) with `01..04` on the left and `NAMASTE` / `PROJECT` / `HOBBY` on the right. Thin horizontal bars sit above and below every item with a smooth vertical opacity gradient always visible at rest. Entering scroll (LIST) mode smoothly pulls outer labels, items, and bars closer together and increases their visibility while keeping the center item crisp bold white and neighbors softly faded.
 - **Bottom Scroll-Panel Hint:** Centered mono label at the bottom of the right/scroll panel switching between `SCROLL TO BROWSE` (HERO) and `CLICK A CARD TO OPEN` (LIST).
-- **Compact Touch Bar (`< 900px`):** When the info section scrolls down, the top panel collapses to a `58px` button showing `01  About — Aditya  ▾`; tapping or pulling down expands it.
-- **Cards:** Full-bleed in HERO (`clip-path: inset(0%)`). In LIST state, center card crops smoothly to a `3:4` frame (`~60%` width, `14px` radius) while immediate neighbors shrink to ~44% scale (`~26%` of panel width) peeking above and below. Hover applies subtle `1.015` image scale.
-- **INVERT Toggle:** Mono bottom-left button with `aria-pressed` and a `6px` indicator dot that lights in `--accent-ui` when inverted.
-- **Course Piece:** Winding SVG path (`viewBox 0 0 320 250`) with 4 rightward-aligned waypoint flags (`01 ABOUT`, `02 RUN WITH THE WIND`, `03 RUNNING`, `04 ART`) at fractions `0.04 / 0.36 / 0.68 / 0.96`, larger `4.5px` checkpoint nodes and `12px` mono labels legible on mobile and tablet, progress stroke in `--accent-ui`, runner dot positioned via `getPointAtLength`, large `01 / 04 KM` counter, and a quiet 36-line wind canvas paused whenever hidden or in HERO.
+- **Sticky Compact Touch Bar (`< 900px`):** Mobile scroll rules sit after desktop panel rules so `.shell` scrolls natively, pushing `.panel-right` smoothly upward into its pinned `58px` bottom compact bar (`01  Namaste — About Me  ▾`); scrolling back or tapping glides it open. Mobile footer bar height is slimmed (`~32px`) without shrinking icon or text size.
+- **Cards & App Branding:** Full-bleed in HERO (`clip-path: inset(0%)`) with balanced portrait framing (`50% 42%` About Me, `50% 80%` Running). The `Run with the Wind` icon (`72×72`) stacks cleanly above its heading so the title never wraps awkwardly.
+- **Single Light / Dark Toggle:** Dark is the default. A single minimal bottom-left mono button shows the opposite option: minimal sun icon + `Light` in dark mode, swapping to a half-moon icon + `Dark` in light mode, persisted to `localStorage`.
+- **Course Piece:** Moderately curved symmetric S-curve SVG (`viewBox 0 0 340 260`, `50px` gentle meander) with three identical-arc-length segments so piecewise progress lands the runner dot dead-center on every circular checkpoint (`01 ABOUT ME`, `02 RUN WITH THE WIND`, `03 RUNNING`, `04 ART`). Every passed checkpoint highlights orange and unmarks cleanly when moving back.
 
 ---
 

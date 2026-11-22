@@ -1,48 +1,71 @@
-export function createRenderLoop({ store, rightPanel: rp, stageCards, leftScroll, courseLayer, course, info, announce }) {
-  const $ = (id) => document.getElementById(id), s = store.state;
-  const edgeL = $('edge-left'), edgeR = $('edge-right'), hint = $('state-hint');
-  const cIdx = $('compact-idx'), cTxt = $('compact-text');
-  const rows = [$('sel-prev'), $('sel-curr'), $('sel-next')];
-  let pw = 1, ph = 1, raf = 0, lastT = 0, lastIdx = -1;
+const { abs, max, min, round, exp } = Math, $ = (id) => document.getElementById(id);
+
+export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, leftScroll, courseLayer, course, info, announce }) {
+  const s = store.state, edgeL = $('edge-left'), edgeR = $('edge-right'), hint = $('state-hint'), wheel = $('meter-wheel');
+  const cIdx = $('compact-idx'), cTxt = $('compact-text'), items = [], bars = [];
+  let pw = 1, ph = 1, raf = 0, lastT = 0, lastIdx = -1, rt = 0;
+
+  if (wheel) {
+    const addBar = (v, mid) => { const b = document.createElement('span'); b.className = 'meter-bar'; wheel.append(b); bars.push({ el: b, v, mid }); };
+    addBar(-0.5, 1); addBar(-0.3, 0);
+    s.sections.forEach((sec, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'meter-item'; btn.tabIndex = -1; btn.textContent = sec.title;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        s.mode === 'hero' ? (i === s.activeIndex ? store.enterList() : store.openSection(i)) : (i === s.targetIndex ? store.openSection(i) : store.jumpList(i));
+      });
+      wheel.append(btn); items.push({ el: btn, v: i });
+      if (i < s.sections.length - 1) { addBar(i + 0.3, 0); addBar(i + 0.5, 1); addBar(i + 0.7, 0); }
+    });
+    const lastV = s.sections.length - 1;
+    addBar(lastV + 0.3, 0); addBar(lastV + 0.5, 1);
+  }
 
   const cards = s.sections.map((sec, i) => {
-    const a = document.createElement('a');
-    a.className = 'card-item';
-    a.href = `#${sec.id}`;
-    a.setAttribute('aria-label', `Open ${sec.title}`);
-    const img = sec.media.querySelector('img');
+    const a = document.createElement('a'), scrim = document.createElement('div'), img = sec.media.querySelector('img');
+    a.className = 'card-item'; a.href = `#${sec.id}`; a.setAttribute('aria-label', `Open ${sec.title}`);
     if (img && sec.focus) img.style.objectPosition = sec.focus;
-    const scrim = document.createElement('div');
-    scrim.className = 'card-scrim';
-    scrim.setAttribute('aria-hidden', 'true');
-    a.append(sec.media, scrim);
-    stageCards.append(a);
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      s.mode === 'list' ? store.openSection(i) : store.enterList();
-    });
+    scrim.className = 'card-scrim'; scrim.setAttribute('aria-hidden', 'true');
+    a.append(sec.media, scrim); stageCards.append(a);
+    a.addEventListener('click', (e) => { e.preventDefault(); s.mode === 'list' ? store.openSection(i) : store.enterList(); });
     return a;
   });
 
-  const measure = () => { const r = rp.getBoundingClientRect(); pw = Math.max(1, r.width); ph = Math.max(1, r.height); };
+  const measure = () => { const r = rp.getBoundingClientRect(); pw = max(1, r.width); ph = max(1, r.height); };
 
   const updateLabels = (idx) => {
     if (idx === lastIdx) return;
     lastIdx = idx;
-    const secs = s.sections, items = [secs[idx - 1] || null, secs[idx], secs[idx + 1] || null];
-    const num = String(idx + 1).padStart(2, '0');
+    const cur = s.sections[idx], num = String(idx + 1).padStart(2, '0');
     if (edgeL) edgeL.textContent = num;
+    if (edgeR) edgeR.textContent = cur.category.toUpperCase();
     if (cIdx) cIdx.textContent = num;
-    if (cTxt) cTxt.textContent = `${items[1].category} — ${items[1].title}`;
-    if (edgeR) { edgeR.hidden = !items[1].edge; if (items[1].edge) edgeR.textContent = items[1].edge; }
-    rows.forEach((row, k) => {
-      if (!row) return;
-      const it = items[k];
-      row.dataset.empty = String(!it);
-      row.querySelector('.sel-cat').textContent = it ? it.category : '';
-      row.querySelector('.sel-title').textContent = it ? it.title : '';
-    });
-    if (s.mode === 'list') info.applyTone(items[1]);
+    if (cTxt) cTxt.textContent = `${cur.category} — ${cur.title}`;
+    if (s.mode === 'list') info.applyTone(cur);
+  };
+
+  const renderMeter = (pos, mix) => {
+    const step = 62 - 14 * mix, base = 0.42 + 0.22 * mix, eOp = (0.78 + 0.22 * mix).toFixed(3), ex = (10 * mix).toFixed(1);
+    if (edgeL) { edgeL.style.transform = `translate3d(${ex}px,0,0)`; edgeL.style.opacity = eOp; }
+    if (edgeR) { edgeR.style.transform = `translate3d(-${ex}px,0,0)`; edgeR.style.opacity = eOp; }
+    for (const it of items) {
+      const dy = (it.v - pos) * step, fade = max(0, 1 - abs(dy) / 94), st = it.el.style;
+      if (fade <= 0.01) { st.opacity = '0'; st.pointerEvents = 'none'; continue; }
+      const f = max(0, 1 - abs(it.v - pos) / 0.58);
+      st.transform = `translate3d(-50%,calc(-50% + ${dy.toFixed(2)}px),0) scale(${(0.78 + 0.27 * f).toFixed(3)})`;
+      st.opacity = (fade * (base + (1 - base) * f)).toFixed(3);
+      st.pointerEvents = fade > 0.2 ? 'auto' : 'none';
+      it.el.classList.toggle('is-center', f > 0.5);
+    }
+    for (const b of bars) {
+      const dy = (b.v - pos) * step, fade = max(0, 1 - abs(dy) / 90), st = b.el.style;
+      if (fade <= 0.01) { st.opacity = '0'; continue; }
+      const f = max(0, 1 - abs(b.v - pos) / 0.75);
+      st.width = `${((b.mid ? 15 : 8) + 9 * f).toFixed(1)}px`;
+      st.transform = `translate3d(-50%,calc(-50% + ${dy.toFixed(2)}px),0)`;
+      st.opacity = (fade * (0.46 + 0.18 * mix + 0.34 * f)).toFixed(3);
+    }
   };
 
   const render = () => {
@@ -53,33 +76,28 @@ export function createRenderLoop({ store, rightPanel: rp, stageCards, leftScroll
     const stride = ph * 1.05 + (ch * 0.72 + ph * 0.17 - ph * 1.05) * mix;
 
     cards.forEach((c, i) => {
-      const d = i - pos, ad = Math.abs(d), sc = 1 - Math.min(1, ad) * 0.56 * mix;
-      const op = mix < 0.05 ? Math.max(0, 1 - ad) : ad > 1.05 ? Math.max(0, 1 - (ad - 1.05) * 1.4) : 1 - ad * 0.14 * mix;
-      const st = c.style;
+      const d = i - pos, ad = abs(d), sc = 1 - min(1, ad) * 0.56 * mix, st = c.style;
+      const op = mix < 0.05 ? max(0, 1 - ad) : ad > 1.05 ? max(0, 1 - (ad - 1.05) * 1.4) : 1 - ad * 0.14 * mix;
       st.transform = `translate3d(0,${(d * stride).toFixed(2)}px,0) scale(${sc.toFixed(4)})`;
       st.clipPath = `inset(${iy.toFixed(2)}% ${ix.toFixed(2)}% ${iy.toFixed(2)}% ${ix.toFixed(2)}% round ${rad.toFixed(1)}px)`;
-      st.opacity = op.toFixed(3);
-      st.zIndex = String(10 - Math.round(ad * 3));
-      st.pointerEvents = op > 0.15 ? 'auto' : 'none';
+      st.opacity = op.toFixed(3); st.zIndex = String(10 - round(ad * 3)); st.pointerEvents = op > 0.15 ? 'auto' : 'none';
       c.tabIndex = (isList ? ad < 1.3 : i === s.activeIndex) ? 0 : -1;
       c.classList.toggle('is-hover-lift', isList && ad < 0.45);
     });
 
-    leftScroll.style.opacity = (1 - mix).toFixed(3);
-    courseLayer.style.opacity = mix.toFixed(3);
-    updateLabels(Math.max(0, Math.min(sections.length - 1, Math.round(pos))));
+    leftScroll.style.opacity = (1 - mix).toFixed(3); courseLayer.style.opacity = mix.toFixed(3);
+    renderMeter(pos, mix);
+    updateLabels(max(0, min(sections.length - 1, round(pos))));
     course.update(pos, mix, rm);
   };
 
   const tick = (now) => {
-    const dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0.016;
-    lastT = now;
+    const dt = lastT ? min(0.05, (now - lastT) / 1000) : 0.016; lastT = now;
     if (s.reducedMotion) { s.position = s.targetIndex; s.listMix = s.targetListMix; render(); raf = lastT = 0; return; }
-    s.position += (s.targetIndex - s.position) * (1 - Math.exp(-6.8 * dt));
-    s.listMix += (s.targetListMix - s.listMix) * (1 - Math.exp(-6.2 * dt));
-    const pOk = Math.abs(s.targetIndex - s.position) < 6e-4, mOk = Math.abs(s.targetListMix - s.listMix) < 6e-4;
-    if (pOk) s.position = s.targetIndex;
-    if (mOk) s.listMix = s.targetListMix;
+    s.position += (s.targetIndex - s.position) * (1 - exp(-6.8 * dt));
+    s.listMix += (s.targetListMix - s.listMix) * (1 - exp(-6.2 * dt));
+    const pOk = abs(s.targetIndex - s.position) < 6e-4, mOk = abs(s.targetListMix - s.listMix) < 6e-4;
+    if (pOk) s.position = s.targetIndex; if (mOk) s.listMix = s.targetListMix;
     render();
     if (pOk && mOk) { raf = lastT = 0; return; }
     raf = requestAnimationFrame(tick);
@@ -87,39 +105,28 @@ export function createRenderLoop({ store, rightPanel: rp, stageCards, leftScroll
 
   const wake = () => { if (!raf) { lastT = 0; raf = requestAnimationFrame(tick); } };
 
-  const sync = (reason) => {
-    const { mode, targetIndex, activeIndex, sections, reducedMotion } = s, isList = mode === 'list';
-    rp.classList.toggle('is-list', isList);
+  const sync = (r) => {
+    const { mode, targetIndex: ti, activeIndex: ai, sections, reducedMotion: rm } = s, isList = mode === 'list';
+    rp.classList.toggle('is-list', isList); shell?.classList.toggle('is-list-mode', isList);
+    if (shell && (isList || r === 'open-section')) { shell.scrollTop = 0; rp.style.setProperty('--cp', '0'); shell.classList.remove('is-top-compact'); }
     if (hint) hint.textContent = isList ? 'CLICK A CARD TO OPEN' : 'SCROLL TO BROWSE';
-    info.setListVisibility(isList);
-    course.setInteractive(isList);
-    if (reason === 'open-section' || reason === 'init') {
-      info.setSection(activeIndex, { instant: reason === 'init', reducedMotion, focusHeading: reason === 'open-section', announce: reason === 'open-section' });
-    } else if (reason === 'mode' && !isList) {
-      info.setSection(activeIndex, { instant: true, reducedMotion, focusHeading: true, announce: true });
-    } else if (reason === 'mode' || reason === 'step') {
-      cards[targetIndex]?.focus({ preventScroll: true });
-      announce(`Browsing sections, ${targetIndex + 1} of ${sections.length}`);
-    }
-    wake();
+    info.setListVisibility(isList); course.setInteractive(isList);
+    if (r === 'open-section' || r === 'init') info.setSection(ai, { instant: r === 'init', reducedMotion: rm, focusHeading: r === 'open-section', announce: r === 'open-section' });
+    else if (r === 'mode' && !isList) info.setSection(ai, { instant: true, reducedMotion: rm, focusHeading: true, announce: true });
+    else if (r === 'mode' || r === 'step') { cards[ti]?.focus({ preventScroll: true }); announce(`Browsing sections, ${ti + 1} of ${sections.length}`); }
+    measure(); wake();
   };
 
   const remeasure = () => { measure(); render(); };
-  let rt = 0;
   addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(remeasure, 80); });
   addEventListener('orientationchange', () => setTimeout(remeasure, 120));
-  rp.addEventListener('transitionend', (e) => { if (e.propertyName === 'flex-basis') remeasure(); });
   store.subscribe((_, r) => sync(r));
+  (window.requestIdleCallback || ((fn) => setTimeout(fn, 400)))(() => s.sections.forEach((sec, idx) => {
+    if (idx === s.activeIndex) return;
+    const img = sec.media.querySelector('img');
+    if (img) { img.loading = 'eager'; img.decode?.().catch(() => {}); }
+  }), { timeout: 1500 });
 
-  (window.requestIdleCallback || ((fn) => setTimeout(fn, 400)))(() => {
-    s.sections.forEach((sec, idx) => {
-      if (idx === s.activeIndex) return;
-      const img = sec.media.querySelector('img');
-      if (img) { img.loading = 'eager'; img.decode?.().catch(() => {}); }
-    });
-  }, { timeout: 1500 });
-
-  measure();
-  sync('init');
+  measure(); sync('init');
   return { remeasure };
 }

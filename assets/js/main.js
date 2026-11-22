@@ -13,12 +13,12 @@ guard(initMailto);
 
 guard(() => {
   const $ = (id) => document.getElementById(id);
-  const leftScroll = $('left-scroll'), rightPanel = $('panel-right'), stageCards = $('stage-cards'), courseLayer = $('course-layer');
-  if (!leftScroll || !rightPanel || !stageCards || !courseLayer) return;
+  const shell = $('main'), leftScroll = $('left-scroll'), rightPanel = $('panel-right'), stageCards = $('stage-cards'), courseLayer = $('course-layer');
+  if (!shell || !leftScroll || !rightPanel || !stageCards || !courseLayer) return;
 
   const sections = [...leftScroll.querySelectorAll('.section-article')].map((article, index) => {
     const d = article.dataset;
-    return { index, id: article.id, category: d.category || '', title: d.title || '', edge: d.edge || '', focus: d.focus || '50% 50%', tone: d.tone || '#19241a', article, media: article.querySelector('.section-media') };
+    return { index, id: article.id, category: d.category || '', title: d.title || '', focus: d.focus || '50% 50%', tone: d.tone || '#19241a', article, media: article.querySelector('.section-media') };
   });
   if (!sections.length) return;
 
@@ -28,6 +28,6 @@ guard(() => {
   const store = createState(sections);
   const info = createInfoController(sections, leftScroll, announce);
   const course = createCourseController(courseLayer, sections);
-  const renderer = createRenderLoop({ store, rightPanel, stageCards, leftScroll, courseLayer, course, info, announce });
-  initInput({ rightPanel, leftScroll, store, shell: $('main'), compactBar: $('compact-bar'), onCompactChange: renderer.remeasure });
+  createRenderLoop({ store, shell, rightPanel, stageCards, leftScroll, courseLayer, course, info, announce });
+  initInput({ rightPanel, leftScroll, store, shell, compactBar: $('compact-bar') });
 });

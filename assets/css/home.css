@@ -158,10 +158,9 @@ html:not(.js) .section-media img {
   outline: none;
 }
 
+.info-heading:focus,
 .info-heading:focus-visible {
-  outline: 2px solid var(--accent-ui);
-  outline-offset: 6px;
-  border-radius: 4px;
+  outline: none;
 }
 
 .info-list {
@@ -267,15 +266,16 @@ html:not(.js) .section-media img {
 
 .app-brand {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.9rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: clamp(1.4rem, 2.8vh, 2rem);
 }
 
 .app-logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
   border: 1px solid var(--border);
   flex-shrink: 0;
   display: block;
@@ -370,24 +370,6 @@ html.js .panel {
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-}
-
-/* Touch / Mobile / Tablet (< 900px): top showcase shrinks to 58px bar as info scrolls */
-@media (max-width: 899px) {
-  html.js .panel-right {
-    order: 1;
-    flex: 0 0 48dvh;
-    transition: flex-basis 340ms var(--ease-out);
-  }
-
-  html.js .shell.is-top-compact .panel-right {
-    flex-basis: 58px;
-  }
-
-  html.js .panel-left {
-    order: 2;
-    flex: 1 1 0;
-  }
 }
 
 /* Desktop >= 900px: left 41.5% / right 58.5% */
@@ -510,9 +492,9 @@ html.js .section-article.is-entering .info-row:nth-child(6) { animation-delay: 2
 .course-svg {
   position: relative;
   z-index: 1;
-  width: min(100%, 380px);
+  width: min(100%, 340px);
   height: auto;
-  max-height: 76%;
+  max-height: 78%;
   overflow: visible;
 }
 
@@ -539,18 +521,24 @@ html.js .section-article.is-entering .info-row:nth-child(6) { animation-delay: 2
   fill: var(--panel-bg);
   stroke: var(--border-strong);
   stroke-width: 1.8;
-  transition: stroke 220ms var(--ease-out);
+  transition: stroke 200ms var(--ease-out), fill 200ms var(--ease-out);
+}
+
+.course-flag.is-passed .course-flag-node {
+  stroke: var(--accent-ui);
+  fill: var(--accent-ui);
 }
 
 .course-flag.is-current .course-flag-node {
   stroke: var(--accent-ui);
+  fill: var(--accent-ui);
 }
 
 .course-flag-label {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 400;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   fill: var(--text-secondary);
   transition: fill 220ms var(--ease-out);
 }
@@ -602,7 +590,7 @@ html.js .section-article.is-entering .info-row:nth-child(6) { animation-delay: 2
   color: var(--text-muted);
 }
 
-/* Left panel bottom bar: INVERT only */
+/* Left panel bottom bar: single Light / Dark theme toggle */
 .left-footer {
   position: relative;
   z-index: 4;
@@ -615,7 +603,7 @@ html.js .section-article.is-entering .info-row:nth-child(6) { animation-delay: 2
   background: var(--panel-bg);
 }
 
-.mono-btn {
+.theme-btn {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
@@ -627,18 +615,32 @@ html.js .section-article.is-entering .info-row:nth-child(6) { animation-delay: 2
   gap: 0.45rem;
   color: var(--text-primary);
   cursor: pointer;
+  transition: opacity var(--dur-fast) var(--ease-out);
 }
 
-.mono-btn-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--text-muted);
-  transition: background-color var(--dur-fast) var(--ease-out);
+.theme-btn:hover {
+  opacity: 0.78;
 }
 
-.mono-btn[aria-pressed="true"] .mono-btn-dot {
-  background: var(--accent-ui);
+.theme-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.theme-btn .icon-moon {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-btn .icon-sun {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-btn .icon-moon {
+  display: block;
 }
 
 /* =========================================================================
@@ -697,7 +699,7 @@ html.js .panel-right {
   pointer-events: none;
 }
 
-/* Compact 1-entry bar shown on mobile/tablet when scrolled down */
+/* Compact 1-entry bar pinned to bottom 58px of sticky top panel on mobile/tablet */
 .compact-bar {
   display: none;
 }
@@ -705,22 +707,23 @@ html.js .panel-right {
 @media (max-width: 899px) {
   .compact-bar {
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 25;
     width: 100%;
-    height: 100%;
+    height: 58px;
     padding: 0 1.1rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: rgba(7, 7, 7, 0.52);
+    background: rgba(7, 7, 7, 0.56);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     color: var(--overlay-primary);
-    opacity: 0;
+    opacity: clamp(0, calc((var(--cp, 0) - 0.52) / 0.48), 1);
     pointer-events: none;
     cursor: pointer;
-    transition: opacity 220ms var(--ease-out);
   }
 
   .compact-idx {
@@ -749,16 +752,20 @@ html.js .panel-right {
     flex-shrink: 0;
   }
 
+  .panel-right .email-top,
+  .panel-right .edge-label,
+  .panel-right .selector-wrap,
+  .panel-right .stage-hint {
+    opacity: clamp(0, calc(1 - var(--cp, 0) * 1.65), 1);
+  }
+
   .shell.is-top-compact .compact-bar {
-    opacity: 1;
     pointer-events: auto;
   }
 
   .shell.is-top-compact .email-top,
-  .shell.is-top-compact .edge-label,
   .shell.is-top-compact .selector-wrap,
   .shell.is-top-compact .stage-hint {
-    opacity: 0;
     pointer-events: none;
   }
 }
@@ -787,12 +794,27 @@ html.js .panel-right {
   opacity: 0.82;
 }
 
-/* Edge labels (left: 01, right: ME / BUILDING / SINCE 2022) */
-.edge-label {
+/* Unified centered moving meter with flanking edge labels */
+.selector-wrap {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 15;
+  inset: 0;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.25rem 1.25rem;
+  pointer-events: none;
+}
+
+.meter-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(0.85rem, 2.4vw, 1.85rem);
+  width: min(100%, 420px);
+}
+
+.edge-label {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   line-height: 1.25;
@@ -801,123 +823,57 @@ html.js .panel-right {
   color: var(--overlay-primary);
   font-variant-numeric: tabular-nums;
   pointer-events: none;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.65);
-  transition: opacity 200ms var(--ease-out);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+  white-space: nowrap;
+  will-change: transform, opacity;
 }
 
 .edge-left {
-  left: clamp(0.75rem, 2.2vw, 1.75rem);
+  text-align: right;
 }
 
 .edge-right {
-  right: clamp(0.75rem, 2.2vw, 1.75rem);
-  text-align: right;
-  max-width: 9ch;
-  white-space: normal;
-  overflow-wrap: break-word;
-}
-
-.edge-right[hidden] {
-  display: none;
-}
-
-/* Center three-row title selector + tick stack (no truncation) */
-.selector-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 16;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem clamp(2.5rem, 6vw, 4.5rem) 3rem;
-  pointer-events: none;
-  transition: opacity 200ms var(--ease-out);
-}
-
-.selector-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.76fr) 24px minmax(0, 1.24fr);
-  column-gap: clamp(0.6rem, 1.6vw, 1.25rem);
-  row-gap: 0.35rem;
-  align-items: center;
-  width: min(100%, 460px);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
-}
-
-.sel-row {
-  display: contents;
-}
-
-.sel-cat,
-.sel-title {
-  white-space: normal;
-  line-height: 1.18;
-  transition: opacity 240ms var(--ease-out);
-}
-
-.sel-cat {
-  text-align: right;
-  font-size: 0.76rem;
-  color: var(--overlay-secondary);
-}
-
-.sel-title {
   text-align: left;
-  font-size: 0.76rem;
-  color: var(--overlay-secondary);
 }
 
-.sel-row--current .sel-cat,
-.sel-row--current .sel-title {
-  font-size: clamp(0.92rem, 1.4vw, 1.15rem);
-  font-weight: 600;
-  color: var(--overlay-primary);
+.meter-wheel {
+  position: relative;
+  width: clamp(165px, 24vw, 215px);
+  height: 184px;
+  overflow: hidden;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.78);
+}
+
+.meter-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 4px 8px;
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.38vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.15;
   letter-spacing: -0.01em;
-}
-
-.sel-row--neighbor .sel-cat,
-.sel-row--neighbor .sel-title {
+  white-space: nowrap;
+  color: var(--overlay-primary);
   cursor: pointer;
   pointer-events: auto;
-  background: none;
-  border: 0;
-  padding: 2px 0;
-  font-family: var(--font-sans);
+  will-change: transform, opacity;
 }
 
-.sel-row--neighbor .sel-cat:hover,
-.sel-row--neighbor .sel-title:hover {
-  color: var(--overlay-primary);
+.meter-item.is-center {
+  font-weight: 600;
 }
 
-.sel-row[data-empty="true"] .sel-cat,
-.sel-row[data-empty="true"] .sel-title {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.tick-stack {
-  grid-column: 2;
-  grid-row: 1 / span 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 4px 0;
-}
-
-.tick {
-  width: 8px;
+.meter-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   height: 1px;
-  background: rgba(246, 244, 240, 0.45);
-}
-
-.tick--current {
-  width: 22px;
-  height: 2px;
-  background: var(--accent);
+  border-radius: 1px;
+  background: var(--overlay-primary);
+  pointer-events: none;
+  will-change: transform, width, opacity;
 }
 
 /* Bottom state hint on the scroll screen */
@@ -939,8 +895,86 @@ html.js .panel-right {
   transition: opacity 200ms var(--ease-out);
 }
 
-/* Mobile / Tablet compact refinements (< 900px) */
+/* Mobile / Tablet (< 900px): placed AFTER desktop panel rules so sticky native scroll wins cascade */
 @media (max-width: 899px) {
+  html.js .shell {
+    --mob-hero-h: max(46dvh, 270px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scrollbar-width: none;
+  }
+
+  html.js .shell::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.js .panel-right {
+    order: 1;
+    flex: 0 0 auto;
+    height: var(--mob-hero-h);
+    position: sticky;
+    top: calc(58px - var(--mob-hero-h));
+    z-index: 20;
+  }
+
+  html.js .panel-left {
+    order: 2;
+    flex: 1 0 auto;
+    overflow: visible;
+    z-index: 1;
+    min-height: calc(100dvh - var(--mob-hero-h) - 24px);
+  }
+
+  html.js .left-viewport {
+    overflow: visible;
+    flex: 1 0 auto;
+  }
+
+  html.js .left-scroll {
+    position: relative;
+    inset: auto;
+    overflow: visible;
+    height: auto;
+  }
+
+  html.js .shell.is-list-mode {
+    overflow: hidden;
+  }
+
+  html.js .shell.is-list-mode .panel-right {
+    position: relative;
+    top: 0;
+    flex: 0 0 46dvh;
+    height: 46dvh;
+  }
+
+  html.js .shell.is-list-mode .panel-left {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  html.js .shell.is-list-mode .left-viewport {
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  html.js .shell.is-list-mode .left-scroll {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .left-footer {
+    padding: 0.15rem 1rem;
+  }
+
+  .theme-btn {
+    min-height: 28px;
+  }
+
   .info-row {
     grid-template-columns: minmax(82px, 30%) 1fr;
     gap: 0.5rem 0.9rem;
@@ -950,6 +984,11 @@ html.js .panel-right {
   .info-portrait {
     width: 140px;
     height: 172px;
+  }
+
+  .app-logo {
+    width: 64px;
+    height: 64px;
   }
 
   .course-layer {
@@ -975,17 +1014,22 @@ html.js .panel-right {
     right: 0.6rem;
   }
 
-  .edge-right {
-    max-width: 7ch;
-    font-size: 0.64rem;
-  }
-
-  .edge-left {
+  .edge-label {
     font-size: 0.64rem;
   }
 
   .selector-wrap {
-    padding: 2.4rem 2.75rem 2.3rem;
+    padding: 2rem 0.9rem;
+  }
+
+  .meter-stage {
+    column-gap: 0.65rem;
+    width: min(100%, 350px);
+  }
+
+  .meter-wheel {
+    width: 162px;
+    height: 158px;
   }
 
   .stage-hint {
@@ -996,9 +1040,6 @@ html.js .panel-right {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  html.js .panel-right {
-    transition: none;
-  }
 
   html.js .section-article.is-leaving {
     animation: none;
