@@ -36,7 +36,7 @@ This document specifies the layout grid, two-state machine, gesture normalizatio
                                                     (clamped 0..3, no bounce)
 ```
 
-- **Deep linking:** Hash-only (`#about`, `#run-with-the-wind`, `#running`, `#art`) updated via `history.replaceState` when opening a section; `hashchange` opens the target section directly in HERO state. Unknown hashes resolve to `about`. LIST state is never stored in the URL.
+- **Deep linking:** Clean root URL (no `#about`) for the base landing section; hash-only (`#run-with-the-wind`, `#running`, `#art`) updated via `history.replaceState` when opening other sections; `hashchange` opens the target section directly in HERO state. `#about` and unknown hashes resolve cleanly back to the root URL. LIST state is never stored in the URL.
 
 ---
 

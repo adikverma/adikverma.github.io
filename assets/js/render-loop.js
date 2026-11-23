@@ -21,7 +21,7 @@ export function createRenderLoop({ store, shell, rightPanel: rp, stageCards, lef
 
   const cards = s.sections.map((sec, i) => {
     const a = document.createElement('a'), scrim = document.createElement('div'), img = sec.media.querySelector('img');
-    a.className = 'card-item'; a.href = `#${sec.id}`; a.setAttribute('aria-label', `Open ${sec.title}`);
+    a.className = 'card-item'; a.href = i ? `#${sec.id}` : './'; a.setAttribute('aria-label', `Open ${sec.title}`);
     if (img && sec.focus) img.style.objectPosition = sec.focus;
     scrim.className = 'card-scrim'; scrim.setAttribute('aria-hidden', 'true');
     a.append(sec.media, scrim); stageCards.append(a);
