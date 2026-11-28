@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="#0B0E14" stroke="#263042" stroke-width="2"/>
+  <!-- Stylized leaf frame derived from Run with the Wind logo (#F03010) -->
+  <path d="M 19 49 C 17 29, 25 16, 45 14 C 46 34, 38 47, 19 49 Z" fill="none" stroke="#F03010" stroke-width="4.2" stroke-linejoin="round"/>
+  <!-- Minimalist runner silhouette inside leaf -->
+  <circle cx="35" cy="23.5" r="3" fill="#F03010"/>
+  <path d="M 25.5 31.5 L 30.5 28.5 L 35 30.5 L 39 28 M 32.5 30 L 30 37.5 L 24 44.5 M 30.5 36.5 L 36 38.5 L 34 44" fill="none" stroke="#F03010" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

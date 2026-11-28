@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.adikverma.runwiththewind",
+      "sha256_cert_fingerprints": [
+        "70:AF:44:32:1D:58:BA:B5:E0:36:F6:35:5A:9C:89:87:39:13:0A:81:A6:AF:99:E3:6F:58:06:56:54:7B:92:4D"
+      ]
+    }
+  }
+]

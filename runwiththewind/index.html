@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self' 'sha256-xglsg3hR+J57E4OhdxS2NYDzd1EEHc2QWXnuUM423yM='"
+    />
+    <title>Run with the Wind · Wear OS &amp; Android Run Tracker</title>
+    <meta
+      name="description"
+      content="Run with the Wind — a Wear OS run tracker with an Android phone companion. Record on your wrist, sync to your phone, and share to Strava."
+    />
+    <link rel="canonical" href="https://adikverma.github.io/runwiththewind/" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Run with the Wind" />
+    <meta property="og:url" content="https://adikverma.github.io/runwiththewind/" />
+    <meta property="og:title" content="Run with the Wind · Wear OS &amp; Android Run Tracker" />
+    <meta
+      property="og:description"
+      content="Record on your wrist, sync to your phone, share to Strava. Built for Wear OS and Android."
+    />
+    <meta
+      property="og:image"
+      content="https://adikverma.github.io/assets/img/og-runwiththewind.png?v=20261128"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Run with the Wind — Wear OS watch and Android companion run tracker preview."
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Run with the Wind · Wear OS &amp; Android Run Tracker" />
+    <meta
+      name="twitter:description"
+      content="Record on your wrist, sync to your phone, share to Strava. Built for Wear OS and Android."
+    />
+    <meta
+      name="twitter:image"
+      content="https://adikverma.github.io/assets/img/og-runwiththewind.png?v=20261128"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/product/favicon-rwt.svg?v=20261128" />
+
+    <!-- Preload critical display and body fonts only -->
+    <link
+      rel="preload"
+      href="/assets/fonts/barlow-condensed-700-latin.woff2?v=20261128"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/plus-jakarta-sans-400-700-latin.woff2?v=20261128"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script>(function(){var d=document.documentElement;d.classList.add('js');try{var m=localStorage.getItem('rwt-theme');if(m==='dark'||m==='light')d.setAttribute('data-theme',m);}catch(e){}})();</script>
+
+    <link rel="stylesheet" href="/assets/css/product.css?v=20261128" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Run with the Wind",
+        "operatingSystem": "Android, Wear OS",
+        "applicationCategory": "HealthApplication",
+        "url": "https://adikverma.github.io/runwiththewind/",
+        "author": {
+          "@type": "Person",
+          "name": "Aditya Kumar Verma",
+          "url": "https://adikverma.github.io/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="top-bar">
+      <div class="wrap top-bar-inner">
+        <a class="back-link" href="/#run-with-the-wind">
+          <span aria-hidden="true">←</span>
+          <span>Aditya Kumar Verma</span>
+        </a>
+        <button
+          type="button"
+          id="rwt-theme-toggle"
+          class="theme-toggle js-only"
+          aria-label="Switch color theme"
+          aria-pressed="false"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <circle cx="8" cy="8" r="3" />
+            <path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M12.6 3.4l-1.1 1.1M4.5 11.5l-1.1 1.1" />
+          </svg>
+          <span id="rwt-theme-label">Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- 1. HERO -->
+      <section class="hero" aria-labelledby="hero-title">
+        <svg class="hero-wind" viewBox="0 0 1440 420" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-40 90 C 320 40, 680 150, 1080 80 S 1340 110, 1480 75" stroke-width="1.4" />
+          <path d="M-40 175 C 360 120, 720 220, 1120 150 S 1360 185, 1480 155" stroke-width="1.2" />
+          <path d="M-40 295 C 340 250, 700 340, 1100 280 S 1350 310, 1480 285" stroke-width="1" />
+        </svg>
+
+        <div class="wrap hero-inner">
+          <div class="hero-lockup">
+            <picture>
+              <source srcset="/assets/img/run-with-the-wind-logo.webp?v=20261128" type="image/webp" />
+              <img
+                class="hero-logo"
+                src="/assets/img/run-with-the-wind-logo.png?v=20261128"
+                width="48"
+                height="48"
+                decoding="async"
+                alt="Run with the Wind emblem"
+              />
+            </picture>
+            <p class="hero-status">In development · personal project</p>
+          </div>
+
+          <h1 id="hero-title" class="hero-title">Run with the Wind</h1>
+          <p class="hero-pitch">
+            Record on your wrist, sync to your phone, share to Strava.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#features">See what's built</a>
+            <a class="btn btn-secondary" href="#dev-log">Read the dev log</a>
+            <a
+              class="btn btn-link"
+              href="[[APP_REPO_URL]]"
+              data-optional-url="[[APP_REPO_URL]]"
+              target="_blank"
+              rel="noopener noreferrer"
+              hidden
+            >
+              <span>Source on GitHub</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. PRODUCT FEATURES SHOWCASE -->
+      <section id="features" class="band band-alt" aria-labelledby="features-heading">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2 id="features-heading" class="sec-title">Built for the run</h2>
+            <p class="sec-sub">
+              A focused Wear OS recorder paired with an Android companion—fast on your wrist, clear
+              after you stop.
+            </p>
+          </div>
+
+          <div class="feat-spotlights">
+            <article class="feat-spot">
+              <div class="feat-head-row">
+                <span class="feat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="8" />
+                    <path d="M12 8v4l2.5 1.8" />
+                  </svg>
+                </span>
+                <span class="feat-kicker">Wear OS watch</span>
+              </div>
+              <h3 class="feat-spot-title">Live metrics on your wrist</h3>
+              <p class="feat-desc">
+                High-contrast telemetry updated every second so you can check effort mid-stride
+                without breaking rhythm or carrying your phone.
+              </p>
+              <p class="feat-meta tabular">Distance · Pace · Heart rate · Elevation · Splits</p>
+            </article>
+
+            <article class="feat-spot">
+              <div class="feat-head-row">
+                <span class="feat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 17l5-5 4 3 7-8" />
+                    <circle cx="4" cy="17" r="1.5" />
+                    <circle cx="20" cy="7" r="1.5" />
+                  </svg>
+                </span>
+                <span class="feat-kicker">Android companion</span>
+              </div>
+              <h3 class="feat-spot-title">Activity history, routes &amp; charts</h3>
+              <p class="feat-desc">
+                Every finished run lands in a clean local log on your phone with full GPS route
+                maps, split summaries, and pace and heart-rate trends.
+              </p>
+              <p class="feat-meta tabular">GPS route map · Split summaries · Pace &amp; HR charts</p>
+            </article>
+          </div>
+
+          <div class="feat-pillars">
+            <article class="feat-pillar">
+              <div class="feat-head-row">
+                <span class="feat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="12" r="7" />
+                    <path d="M19 9v6" />
+                  </svg>
+                </span>
+                <span class="feat-kicker">Hardware controls</span>
+              </div>
+              <h3 class="feat-title">Rotary and button controls</h3>
+              <p class="feat-desc">
+                Switch screens and manage active workouts using your watch's rotary input and
+                physical side buttons.
+              </p>
+            </article>
+
+            <article class="feat-pillar">
+              <div class="feat-head-row">
+                <span class="feat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" />
+                    <path d="M9.2 12.2l2 2 3.8-4" />
+                  </svg>
+                </span>
+                <span class="feat-kicker">Reliability</span>
+              </div>
+              <h3 class="feat-title">Crash-safe recording</h3>
+              <p class="feat-desc">
+                Workout progress saves continuously on the watch and recovers cleanly if the app or
+                watch restarts mid-run.
+              </p>
+            </article>
+
+            <article class="feat-pillar">
+              <div class="feat-head-row">
+                <span class="feat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M7 8h10l-3-3" />
+                    <path d="M17 16H7l3 3" />
+                  </svg>
+                </span>
+                <span class="feat-kicker">Seamless transfer</span>
+              </div>
+              <h3 class="feat-title">Automatic watch-to-phone sync</h3>
+              <p class="feat-desc">
+                Completed runs move automatically to your Android phone with delivery confirmation—no
+                manual exports required.
+              </p>
+            </article>
+
+            <article class="feat-pillar">
+              <div class="feat-head-row">
+                <span class="feat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 16V5" />
+                    <path d="M7.5 9.5L12 5l4.5 4.5" />
+                    <path d="M5 19h14" />
+                  </svg>
+                </span>
+                <span class="feat-kicker">Sharing</span>
+              </div>
+              <!-- Official Strava brand assets slot (replace or pair text when approved) -->
+              <h3 class="feat-title">One-tap upload to Strava</h3>
+              <p class="feat-desc">
+                Publish any activity from your phone to Strava when you choose—nothing is ever
+                uploaded automatically without you.
+              </p>
+            </article>
+          </div>
+
+          <div class="roadmap-panel">
+            <div class="roadmap-head">
+              <h3 class="roadmap-title">Coming soon</h3>
+              <p class="roadmap-sub">Next up as development continues.</p>
+            </div>
+            <ul class="roadmap-list">
+              <li class="roadmap-item">
+                <strong class="roadmap-name">Touch lock</strong>
+                <p class="roadmap-desc">
+                  Lock the watch touchscreen during runs while keeping hardware controls active.
+                </p>
+              </li>
+              <li class="roadmap-item">
+                <strong class="roadmap-name">More sports</strong>
+                <p class="roadmap-desc">Dedicated workout profiles for cycling and swimming.</p>
+              </li>
+              <li class="roadmap-item">
+                <strong class="roadmap-name">More upload destinations</strong>
+                <p class="roadmap-desc">Additional training platforms alongside Strava.</p>
+              </li>
+              <li class="roadmap-item">
+                <strong class="roadmap-name">Phone-only recording</strong>
+                <p class="roadmap-desc">
+                  Track runs directly from your Android phone when leaving the watch behind.
+                </p>
+              </li>
+              <li class="roadmap-item">
+                <strong class="roadmap-name">GPX and FIT export</strong>
+                <p class="roadmap-desc">
+                  Export standard workout files directly to your phone for backups or other tools.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. HOW IT WORKS -->
+      <section class="band" aria-labelledby="how-heading">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2 id="how-heading" class="sec-title">How it works</h2>
+            <p class="sec-sub">Three steps from lacing up to reviewing your run.</p>
+          </div>
+
+          <ol class="steps-grid">
+            <li class="step-card">
+              <span class="step-num tabular">01</span>
+              <h3 class="step-title">Record on the watch</h3>
+              <p class="step-desc">
+                Start your run on Wear OS and track distance, pace, heart rate, elevation, and
+                splits—without carrying your phone.
+              </p>
+            </li>
+
+            <li class="step-card">
+              <span class="step-num tabular">02</span>
+              <h3 class="step-title">Sync to the phone</h3>
+              <p class="step-desc">
+                Once you finish, your watch sends the workout over to your Android phone so you can
+                browse your route and charts.
+              </p>
+            </li>
+
+            <li class="step-card">
+              <span class="step-num tabular">03</span>
+              <!-- Official Strava brand assets slot -->
+              <h3 class="step-title">Upload to Strava</h3>
+              <p class="step-desc">
+                Tap upload on any activity in the phone app to publish your run to Strava on your
+                terms.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 4. SCREENS SCROLL-SNAP GALLERY (Swap inline SVGs for /assets/img/product/screens/screen-01.webp …) -->
+      <section id="screens" class="band band-alt" aria-labelledby="screens-heading">
+        <div class="wrap">
+          <div class="gallery-bar">
+            <div class="sec-head">
+              <h2 id="screens-heading" class="sec-title">Screens</h2>
+              <p class="sec-sub">
+                Illustrative previews while real device screenshots are being captured.
+              </p>
+            </div>
+            <div class="gallery-nav js-only">
+              <button type="button" id="gallery-prev" class="icon-btn" aria-label="Scroll screens left">
+                <span aria-hidden="true">←</span>
+              </button>
+              <button type="button" id="gallery-next" class="icon-btn" aria-label="Scroll screens right">
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="screen-track" class="screen-track" tabindex="0" aria-label="App screen gallery">
+            <!-- Slot 01: replace SVG with <img src="/assets/img/product/screens/screen-01.webp?v=20261128" width="600" height="750" loading="lazy" decoding="async" alt="Watch live metrics screen" /> -->
+            <figure class="screen-slot">
+              <div class="screen-frame">
+                <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Wear OS watch live metrics screen">
+                  <rect width="240" height="300" fill="#0b0e14" />
+                  <circle cx="120" cy="150" r="94" fill="#06080c" stroke="#394760" stroke-width="5" />
+                  <circle cx="120" cy="150" r="82" fill="none" stroke="#263042" stroke-width="4" />
+                  <path d="M 120 68 A 82 82 0 1 1 56 201" fill="none" stroke="#f03010" stroke-width="5" stroke-linecap="round" />
+                  <text x="120" y="114" text-anchor="middle" fill="#8b98ad" font-size="11" font-family="sans-serif">DISTANCE</text>
+                  <text x="120" y="160" text-anchor="middle" fill="#f2f5fa" font-size="42" font-weight="700" font-family="sans-serif">6.42</text>
+                  <text x="120" y="192" text-anchor="middle" fill="#ff6847" font-size="13" font-weight="600" font-family="sans-serif">4:08 /km · 162 bpm</text>
+                </svg>
+              </div>
+              <figcaption class="screen-cap">
+                <span>Watch · Live metrics</span>
+                <span class="screen-illus">Illustrative</span>
+              </figcaption>
+            </figure>
+
+            <!-- Slot 02: replace SVG with /assets/img/product/screens/screen-02.webp -->
+            <figure class="screen-slot">
+              <div class="screen-frame">
+                <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Wear OS post-run workout summary screen">
+                  <rect width="240" height="300" fill="#0b0e14" />
+                  <circle cx="120" cy="150" r="94" fill="#06080c" stroke="#394760" stroke-width="5" />
+                  <text x="120" y="108" text-anchor="middle" fill="#6fe3a8" font-size="11" font-weight="600" font-family="sans-serif">RUN SAVED</text>
+                  <text x="120" y="150" text-anchor="middle" fill="#f2f5fa" font-size="34" font-weight="700" font-family="sans-serif">6.42 km</text>
+                  <text x="120" y="178" text-anchor="middle" fill="#b7c1d1" font-size="13" font-family="sans-serif">26:34 · 4:08 /km</text>
+                  <text x="120" y="206" text-anchor="middle" fill="#8b98ad" font-size="11" font-family="sans-serif">Syncing to phone</text>
+                </svg>
+              </div>
+              <figcaption class="screen-cap">
+                <span>Watch · Workout summary</span>
+                <span class="screen-illus">Illustrative</span>
+              </figcaption>
+            </figure>
+
+            <!-- Slot 03: replace SVG with /assets/img/product/screens/screen-03.webp -->
+            <figure class="screen-slot">
+              <div class="screen-frame">
+                <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Android phone activity history list">
+                  <rect width="240" height="300" fill="#131822" />
+                  <text x="20" y="38" fill="#f2f5fa" font-size="18" font-weight="700" font-family="sans-serif">Runs</text>
+                  <rect x="18" y="56" width="204" height="66" rx="10" fill="#1a212e" stroke="#263042" />
+                  <text x="30" y="80" fill="#f2f5fa" font-size="14" font-weight="700" font-family="sans-serif">10.02 km · 40:55</text>
+                  <text x="30" y="102" fill="#8b98ad" font-size="11" font-family="sans-serif">4:05 /km · Synced</text>
+                  <rect x="18" y="134" width="204" height="66" rx="10" fill="#1a212e" stroke="#263042" />
+                  <text x="30" y="158" fill="#f2f5fa" font-size="14" font-weight="700" font-family="sans-serif">6.42 km · 26:34</text>
+                  <text x="30" y="180" fill="#8b98ad" font-size="11" font-family="sans-serif">4:08 /km · Synced</text>
+                  <rect x="18" y="212" width="204" height="66" rx="10" fill="#1a212e" stroke="#263042" />
+                  <text x="30" y="236" fill="#f2f5fa" font-size="14" font-weight="700" font-family="sans-serif">15.10 km · 1:05:12</text>
+                  <text x="30" y="258" fill="#8b98ad" font-size="11" font-family="sans-serif">4:19 /km · Synced</text>
+                </svg>
+              </div>
+              <figcaption class="screen-cap">
+                <span>Phone · Activity history</span>
+                <span class="screen-illus">Illustrative</span>
+              </figcaption>
+            </figure>
+
+            <!-- Slot 04: replace SVG with /assets/img/product/screens/screen-04.webp -->
+            <figure class="screen-slot">
+              <div class="screen-frame">
+                <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Android phone route map and pace charts">
+                  <rect width="240" height="300" fill="#131822" />
+                  <rect x="18" y="22" width="204" height="140" rx="12" fill="#0b0e14" stroke="#263042" />
+                  <path d="M 48 124 C 34 86, 76 46, 128 50 C 180 54, 198 88, 180 120 C 162 146, 66 150, 48 124 Z" fill="none" stroke="#f03010" stroke-width="3.5" />
+                  <circle cx="48" cy="124" r="5" fill="#6fe3a8" />
+                  <circle cx="180" cy="120" r="5" fill="#ff6847" />
+                  <rect x="18" y="176" width="204" height="102" rx="12" fill="#0b0e14" stroke="#263042" />
+                  <text x="30" y="200" fill="#8b98ad" font-size="11" font-family="sans-serif">PACE &amp; HEART RATE</text>
+                  <path d="M 30 252 L 66 238 L 102 244 L 138 224 L 174 232 L 208 214" fill="none" stroke="#ff6847" stroke-width="2.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <figcaption class="screen-cap">
+                <span>Phone · Route &amp; charts</span>
+                <span class="screen-illus">Illustrative</span>
+              </figcaption>
+            </figure>
+
+            <!-- Slot 05: replace SVG with /assets/img/product/screens/screen-05.webp -->
+            <figure class="screen-slot">
+              <div class="screen-frame">
+                <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Android phone Strava upload sheet">
+                  <rect width="240" height="300" fill="#131822" />
+                  <rect x="18" y="118" width="204" height="156" rx="16" fill="#1a212e" stroke="#394760" />
+                  <text x="34" y="152" fill="#f2f5fa" font-size="15" font-weight="700" font-family="sans-serif">Share activity</text>
+                  <text x="34" y="174" fill="#8b98ad" font-size="11" font-family="sans-serif">6.42 km · 26:34 · Morning Tempo</text>
+                  <rect x="34" y="196" width="172" height="36" rx="8" fill="#c92409" />
+                  <text x="120" y="219" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700" font-family="sans-serif">Upload to Strava</text>
+                  <text x="34" y="254" fill="#6fe3a8" font-size="11" font-weight="600" font-family="sans-serif">One-tap upload</text>
+                </svg>
+              </div>
+              <figcaption class="screen-cap">
+                <span>Phone · Upload to Strava</span>
+                <span class="screen-illus">Illustrative</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. DEV LOG TIMELINE (Copy-paste any <article class="log-entry">; newest first) -->
+      <section id="dev-log" class="band" aria-labelledby="log-heading">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2 id="log-heading" class="sec-title">Dev log</h2>
+            <p class="sec-sub">Milestones as they land, newest first.</p>
+          </div>
+
+          <div class="log-list">
+            <article class="log-entry">
+              <div class="log-meta tabular">
+                <time data-placeholder-date datetime="[[YYYY-MM]]" hidden>[[YYYY-MM]]</time>
+                <span class="status-badge" data-status="available">Available</span>
+              </div>
+              <div>
+                <h3 class="log-title">
+                  Strava upload: OAuth sign-in, encrypted token storage, and one-tap upload
+                </h3>
+                <p class="log-body">
+                  Completed the Strava OAuth flow with Android App Links callback handling,
+                  encrypted token storage on the phone, and one-tap activity upload.
+                </p>
+              </div>
+            </article>
+
+            <article class="log-entry">
+              <div class="log-meta tabular">
+                <time data-placeholder-date datetime="[[YYYY-MM]]" hidden>[[YYYY-MM]]</time>
+                <span class="status-badge" data-status="available">Available</span>
+              </div>
+              <div>
+                <h3 class="log-title">
+                  Hardening pass: wake lock, bounded buffers, StrictMode and leak checks
+                </h3>
+                <p class="log-body">
+                  Tightened long-run stability on watch and phone with careful wake-lock lifecycles,
+                  bounded in-memory recording buffers, StrictMode verification, and leak audits.
+                </p>
+              </div>
+            </article>
+
+            <article class="log-entry">
+              <div class="log-meta tabular">
+                <time data-placeholder-date datetime="[[YYYY-MM]]" hidden>[[YYYY-MM]]</time>
+                <span class="status-badge" data-status="available">Available</span>
+              </div>
+              <div>
+                <h3 class="log-title">
+                  Phone app: history, activity detail with route and charts, watch-to-phone sync
+                  with acknowledgements
+                </h3>
+                <p class="log-body">
+                  Completed the companion activity log, detailed route and pace/heart-rate charts,
+                  and acknowledged watch-to-phone sync so runs transfer reliably.
+                </p>
+              </div>
+            </article>
+
+            <article class="log-entry">
+              <div class="log-meta tabular">
+                <time data-placeholder-date datetime="[[YYYY-MM]]" hidden>[[YYYY-MM]]</time>
+                <span class="status-badge" data-status="available">Available</span>
+              </div>
+              <div>
+                <h3 class="log-title">
+                  Watch app: Health Services recording at 1 Hz, crash recovery, local history
+                </h3>
+                <p class="log-body">
+                  Built the standalone Wear OS workout recorder with 1 Hz sensor sampling, automatic
+                  crash recovery, rotary and button controls, and on-watch history.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. UNDER THE HOOD (Brief, factual, approachable) -->
+      <section class="band band-alt" aria-labelledby="hood-heading">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2 id="hood-heading" class="sec-title">Under the hood</h2>
+            <p class="sec-sub">
+              A quick look at the Android and Wear OS building blocks behind the app.
+            </p>
+          </div>
+
+          <ul class="hood-grid">
+            <li class="hood-item">
+              <strong class="hood-name">Kotlin</strong>
+              <p class="hood-why">Shared cleanly across the watch and phone apps.</p>
+            </li>
+            <li class="hood-item">
+              <strong class="hood-name">Jetpack Compose</strong>
+              <p class="hood-why">Responsive layouts tuned for round watch faces and phones.</p>
+            </li>
+            <li class="hood-item">
+              <strong class="hood-name">Health Services</strong>
+              <p class="hood-why">Battery-aware Wear OS sensor tracking for GPS, pace, and heart rate.</p>
+            </li>
+            <li class="hood-item">
+              <strong class="hood-name">Room</strong>
+              <p class="hood-why">On-device local storage so your runs stay private with no server.</p>
+            </li>
+            <li class="hood-item">
+              <strong class="hood-name">Wearable Data Layer</strong>
+              <p class="hood-why">Direct watch-to-phone sync with delivery acknowledgements.</p>
+            </li>
+            <li class="hood-item">
+              <strong class="hood-name">WorkManager</strong>
+              <p class="hood-why">Reliable background sync and upload retries when connectivity returns.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7. FAQ (<details> works natively with or without JS) -->
+      <section id="faq" class="band" aria-labelledby="faq-heading">
+        <div class="wrap">
+          <div class="sec-head">
+            <h2 id="faq-heading" class="sec-title">Questions</h2>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Do I need Strava?</summary>
+              <p class="faq-answer">
+                No. Recording runs on your watch and reviewing your history, routes, and charts on
+                your phone work without any account. Strava is only needed if you choose to upload
+                an activity.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Which devices are supported?</summary>
+              <p class="faq-answer">
+                A Wear OS 4+ watch paired with an Android 13+ phone.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Is it on the Play Store?</summary>
+              <p class="faq-answer">
+                Not yet. Run with the Wind is currently in active development.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Is it free?</summary>
+              <p class="faq-answer">
+                Yes. It is a free personal project with no subscriptions, ads, or trackers.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Where does my data go?</summary>
+              <p class="faq-answer">
+                Your workout data stays on your watch and phone. It is only sent to Strava when you
+                tap upload on an activity. Read the full
+                <a href="/runwiththewind/privacy/">Privacy Policy</a>.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Is it affiliated with Strava?</summary>
+              <p class="faq-answer">
+                No. Run with the Wind is an independent personal project and is not affiliated with
+                or endorsed by Strava.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <!-- 8. ABOUT THE DEVELOPER & CONNECT (Formal) -->
+      <section id="connect" class="band band-alt" aria-labelledby="connect-heading">
+        <div class="wrap connect-grid">
+          <div>
+            <h2 id="connect-heading" class="sec-title">About &amp; Connect</h2>
+            <p class="connect-lead">
+              Run with the Wind is designed and developed independently by Aditya Kumar Verma, a
+              full-stack software engineer and distance runner. Visit my portfolio or connect below.
+            </p>
+          </div>
+
+          <dl class="connect-list">
+            <div class="connect-row">
+              <dt class="connect-label">Portfolio</dt>
+              <dd class="connect-value">
+                <a href="https://adikverma.github.io/" target="_blank" rel="noopener noreferrer">adikverma.github.io ↗</a>
+              </dd>
+            </div>
+            <div class="connect-row">
+              <dt class="connect-label">Connect</dt>
+              <dd class="connect-value">
+                <a href="https://www.linkedin.com/in/adityakumarverma-1" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                <a href="https://www.strava.com/athletes/106302606" target="_blank" rel="noopener noreferrer">Strava ↗</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+    </main>
+
+    <!-- 9. FOOTER -->
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-links">
+          <a href="/runwiththewind/privacy/">Privacy Policy</a>
+          <span aria-hidden="true">·</span>
+          <span>
+            Contact:
+            <span
+              data-contact-email
+              data-u="runwiththewind.app"
+              data-d="gmail"
+              data-t="com"
+            >runwiththewind.app [at] gmail.com</span>
+          </span>
+        </div>
+        <p class="footer-disclaimer">
+          Run with the Wind is not affiliated with or endorsed by Strava.
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="/assets/js/product/main.js?v=20261128"></script>
+  </body>
+</html>

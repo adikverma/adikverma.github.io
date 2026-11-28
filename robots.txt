@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /runwiththewind/callback/
 
 Sitemap: https://adikverma.github.io/sitemap.xml
