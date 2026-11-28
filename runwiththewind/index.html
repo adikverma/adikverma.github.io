@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self' 'sha256-xglsg3hR+J57E4OhdxS2NYDzd1EEHc2QWXnuUM423yM='"
+      content="default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'"
     />
     <title>Run with the Wind · Wear OS &amp; Android Run Tracker</title>
     <meta
@@ -26,7 +26,7 @@
     />
     <meta
       property="og:image"
-      content="https://adikverma.github.io/assets/img/og-runwiththewind.png?v=20261128"
+      content="https://adikverma.github.io/assets/img/og-runwiththewind.png"
     />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
@@ -45,30 +45,30 @@
     />
     <meta
       name="twitter:image"
-      content="https://adikverma.github.io/assets/img/og-runwiththewind.png?v=20261128"
+      content="https://adikverma.github.io/assets/img/og-runwiththewind.png"
     />
 
-    <link rel="icon" type="image/svg+xml" href="/assets/img/product/favicon-rwt.svg?v=20261128" />
+    <link rel="icon" type="image/svg+xml" href="/assets/img/product/favicon-rwt.svg" />
 
     <!-- Preload critical display and body fonts only -->
     <link
       rel="preload"
-      href="/assets/fonts/barlow-condensed-700-latin.woff2?v=20261128"
+      href="/assets/fonts/barlow-condensed-700-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/assets/fonts/plus-jakarta-sans-400-700-latin.woff2?v=20261128"
+      href="/assets/fonts/plus-jakarta-sans-400-700-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
 
-    <script>(function(){var d=document.documentElement;d.classList.add('js');try{var m=localStorage.getItem('rwt-theme');if(m==='dark'||m==='light')d.setAttribute('data-theme',m);}catch(e){}})();</script>
+    <script src="/assets/js/product/theme-init.js"></script>
 
-    <link rel="stylesheet" href="/assets/css/product.css?v=20261128" />
+    <link rel="stylesheet" href="/assets/css/product.css" />
 
     <script type="application/ld+json">
       {
@@ -123,10 +123,10 @@
         <div class="wrap hero-inner">
           <div class="hero-lockup">
             <picture>
-              <source srcset="/assets/img/run-with-the-wind-logo.webp?v=20261128" type="image/webp" />
+              <source srcset="/assets/img/run-with-the-wind-logo.webp" type="image/webp" />
               <img
                 class="hero-logo"
-                src="/assets/img/run-with-the-wind-logo.png?v=20261128"
+                src="/assets/img/run-with-the-wind-logo.png"
                 width="48"
                 height="48"
                 decoding="async"
@@ -272,7 +272,6 @@
                 </span>
                 <span class="feat-kicker">Sharing</span>
               </div>
-              <!-- Official Strava brand assets slot (replace or pair text when approved) -->
               <h3 class="feat-title">One-tap upload to Strava</h3>
               <p class="feat-desc">
                 Publish any activity from your phone to Strava when you choose—nothing is ever
@@ -347,7 +346,6 @@
 
             <li class="step-card">
               <span class="step-num tabular">03</span>
-              <!-- Official Strava brand assets slot -->
               <h3 class="step-title">Upload to Strava</h3>
               <p class="step-desc">
                 Tap upload on any activity in the phone app to publish your run to Strava on your
@@ -358,7 +356,7 @@
         </div>
       </section>
 
-      <!-- 4. SCREENS SCROLL-SNAP GALLERY (Swap inline SVGs for /assets/img/product/screens/screen-01.webp …) -->
+      <!-- 4. SCREENS GALLERY -->
       <section id="screens" class="band band-alt" aria-labelledby="screens-heading">
         <div class="wrap">
           <div class="gallery-bar">
@@ -379,7 +377,6 @@
           </div>
 
           <div id="screen-track" class="screen-track" tabindex="0" aria-label="App screen gallery">
-            <!-- Slot 01: replace SVG with <img src="/assets/img/product/screens/screen-01.webp?v=20261128" width="600" height="750" loading="lazy" decoding="async" alt="Watch live metrics screen" /> -->
             <figure class="screen-slot">
               <div class="screen-frame">
                 <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Wear OS watch live metrics screen">
@@ -398,7 +395,6 @@
               </figcaption>
             </figure>
 
-            <!-- Slot 02: replace SVG with /assets/img/product/screens/screen-02.webp -->
             <figure class="screen-slot">
               <div class="screen-frame">
                 <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Wear OS post-run workout summary screen">
@@ -416,7 +412,6 @@
               </figcaption>
             </figure>
 
-            <!-- Slot 03: replace SVG with /assets/img/product/screens/screen-03.webp -->
             <figure class="screen-slot">
               <div class="screen-frame">
                 <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Android phone activity history list">
@@ -439,7 +434,6 @@
               </figcaption>
             </figure>
 
-            <!-- Slot 04: replace SVG with /assets/img/product/screens/screen-04.webp -->
             <figure class="screen-slot">
               <div class="screen-frame">
                 <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Android phone route map and pace charts">
@@ -459,7 +453,6 @@
               </figcaption>
             </figure>
 
-            <!-- Slot 05: replace SVG with /assets/img/product/screens/screen-05.webp -->
             <figure class="screen-slot">
               <div class="screen-frame">
                 <svg viewBox="0 0 240 300" role="img" aria-label="Illustrative Android phone Strava upload sheet">
@@ -481,7 +474,7 @@
         </div>
       </section>
 
-      <!-- 5. DEV LOG TIMELINE (Copy-paste any <article class="log-entry">; newest first) -->
+      <!-- 5. DEV LOG -->
       <section id="dev-log" class="band" aria-labelledby="log-heading">
         <div class="wrap">
           <div class="sec-head">
@@ -558,7 +551,7 @@
         </div>
       </section>
 
-      <!-- 6. UNDER THE HOOD (Brief, factual, approachable) -->
+      <!-- 6. UNDER THE HOOD -->
       <section class="band band-alt" aria-labelledby="hood-heading">
         <div class="wrap">
           <div class="sec-head">
@@ -597,7 +590,7 @@
         </div>
       </section>
 
-      <!-- 7. FAQ (<details> works natively with or without JS) -->
+      <!-- 7. FAQ -->
       <section id="faq" class="band" aria-labelledby="faq-heading">
         <div class="wrap">
           <div class="sec-head">
@@ -654,7 +647,7 @@
           </div>
         </div>
       </section>
-      <!-- 8. ABOUT THE DEVELOPER & CONNECT (Formal) -->
+      <!-- 8. ABOUT & CONNECT -->
       <section id="connect" class="band band-alt" aria-labelledby="connect-heading">
         <div class="wrap connect-grid">
           <div>
@@ -706,6 +699,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/assets/js/product/main.js?v=20261128"></script>
+    <script type="module" src="/assets/js/product/main.js"></script>
   </body>
 </html>

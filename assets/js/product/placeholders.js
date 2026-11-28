@@ -1,18 +1,15 @@
 export function initPlaceholders() {
-  // Hide optional links whose URL is still an unresolved [[PLACEHOLDER]]
   document.querySelectorAll('[data-optional-url]').forEach((el) => {
     const href = el.getAttribute('href') || '';
     const unresolved = !href || href.includes('[[');
     el.hidden = unresolved;
   });
 
-  // Hide unresolved [[YYYY-MM]] dev-log dates until filled in
   document.querySelectorAll('time[data-placeholder-date]').forEach((el) => {
     const val = (el.getAttribute('datetime') || el.textContent || '').trim();
     el.hidden = !val || val.includes('[[');
   });
 
-  // Build mailto: link at runtime from split data attributes once placeholders are replaced
   document.querySelectorAll('[data-contact-email]').forEach((el) => {
     const u = (el.getAttribute('data-u') || '').trim();
     const d = (el.getAttribute('data-d') || '').trim();

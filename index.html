@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self' 'sha256-21olWK7GFDdTawCeWHBp2JD65xYPgIqRRUTa5D2buPc='"
+      content="default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'"
     />
     <title>Aditya Kumar Verma · Software Engineer</title>
     <meta
@@ -24,7 +24,7 @@
       property="og:description"
       content="Aditya Kumar Verma — full-stack engineer (Angular, .NET, AWS) and distance runner; builder of RunWithTheWind."
     />
-    <meta property="og:image" content="https://adikverma.github.io/assets/img/og-card.jpg?v=20261123" />
+    <meta property="og:image" content="https://adikverma.github.io/assets/img/og-card.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -40,23 +40,23 @@
       name="twitter:description"
       content="Aditya Kumar Verma — full-stack engineer (Angular, .NET, AWS) and distance runner; builder of RunWithTheWind."
     />
-    <meta name="twitter:image" content="https://adikverma.github.io/assets/img/og-card.jpg?v=20261123" />
+    <meta name="twitter:image" content="https://adikverma.github.io/assets/img/og-card.jpg" />
 
-    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg?v=20261123" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=20261123" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png?v=20261123" />
+    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
 
     <!-- Preload critical fonts & first section image only -->
     <link
       rel="preload"
-      href="/assets/fonts/inter-tight-var-latin.woff2?v=20261122"
+      href="/assets/fonts/inter-tight-var-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/assets/fonts/jetbrains-mono-var-latin.woff2?v=20261122"
+      href="/assets/fonts/jetbrains-mono-var-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -65,14 +65,14 @@
       rel="preload"
       as="image"
       type="image/webp"
-      imagesrcset="/assets/img/sections/about-sm.webp?v=20261122 960w, /assets/img/sections/about.webp?v=20261122 1200w"
+      imagesrcset="/assets/img/sections/about-sm.webp 960w, /assets/img/sections/about.webp 1200w"
       imagesizes="(min-width: 900px) 58vw, 100vw"
     />
 
-    <script>(function(){var d=document.documentElement;d.classList.add('js');try{var m=localStorage.getItem('theme-mode');if(m==='dark'||m==='light')d.setAttribute('data-theme',m);}catch(e){}})();</script>
+    <script src="/assets/js/theme-init.js"></script>
 
-    <link rel="stylesheet" href="/assets/css/tokens.css?v=20261122c" />
-    <link rel="stylesheet" href="/assets/css/home.css?v=20261122" />
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/home.css" />
 
     <script type="application/ld+json">
       {
@@ -114,11 +114,11 @@
                 <picture>
                   <source
                     type="image/webp"
-                    srcset="/assets/img/sections/about-sm.webp?v=20261122 960w, /assets/img/sections/about.webp?v=20261122 1200w"
+                    srcset="/assets/img/sections/about-sm.webp 960w, /assets/img/sections/about.webp 1200w"
                     sizes="(min-width: 900px) 58vw, 100vw"
                   />
                   <img
-                    src="/assets/img/sections/about.webp?v=20261122"
+                    src="/assets/img/sections/about.webp"
                     width="1200"
                     height="1608"
                     fetchpriority="high"
@@ -140,9 +140,9 @@
                     </p>
                     <figure class="info-portrait">
                       <picture>
-                        <source srcset="/assets/img/me.webp?v=20261122" type="image/webp" />
+                        <source srcset="/assets/img/me.webp" type="image/webp" />
                         <img
-                          src="/assets/img/me.jpg?v=20261122"
+                          src="/assets/img/me.jpg"
                           width="180"
                           height="220"
                           decoding="async"
@@ -229,11 +229,11 @@
                 <picture>
                   <source
                     type="image/webp"
-                    srcset="/assets/img/sections/run-with-the-wind-sm.webp?v=20261122c 720w, /assets/img/sections/run-with-the-wind.webp?v=20261122c 896w"
+                    srcset="/assets/img/sections/run-with-the-wind-sm.webp 720w, /assets/img/sections/run-with-the-wind.webp 896w"
                     sizes="(min-width: 900px) 52vw, 100vw"
                   />
                   <img
-                    src="/assets/img/sections/run-with-the-wind.webp?v=20261122c"
+                    src="/assets/img/sections/run-with-the-wind.webp"
                     width="896"
                     height="1200"
                     loading="lazy"
@@ -283,10 +283,10 @@
                   <dd class="info-value">
                     <a class="action-pill" href="/runwiththewind/">
                       <picture>
-                        <source srcset="/assets/img/run-with-the-wind-logo.webp?v=20261122" type="image/webp" />
+                        <source srcset="/assets/img/run-with-the-wind-logo.webp" type="image/webp" />
                         <img
                           class="action-pill-icon"
-                          src="/assets/img/run-with-the-wind-logo.png?v=20261122"
+                          src="/assets/img/run-with-the-wind-logo.png"
                           width="24"
                           height="24"
                           decoding="async"
@@ -315,11 +315,11 @@
                 <picture>
                   <source
                     type="image/webp"
-                    srcset="/assets/img/sections/running-sm.webp?v=20261122b 960w, /assets/img/sections/running.webp?v=20261122b 1141w"
+                    srcset="/assets/img/sections/running-sm.webp 960w, /assets/img/sections/running.webp 1141w"
                     sizes="(min-width: 900px) 52vw, 100vw"
                   />
                   <img
-                    src="/assets/img/sections/running.webp?v=20261122b"
+                    src="/assets/img/sections/running.webp"
                     width="1141"
                     height="1315"
                     loading="lazy"
@@ -345,9 +345,9 @@
                     <div class="race-gallery">
                       <figure class="info-race-photo">
                         <picture>
-                          <source srcset="/assets/img/running-race.webp?v=20261122b" type="image/webp" />
+                          <source srcset="/assets/img/running-race.webp" type="image/webp" />
                           <img
-                            src="/assets/img/running-race.jpg?v=20261122b"
+                            src="/assets/img/running-race.jpg"
                             width="640"
                             height="426"
                             loading="lazy"
@@ -358,9 +358,9 @@
                       </figure>
                       <figure class="info-race-photo">
                         <picture>
-                          <source srcset="/assets/img/running-race-2.webp?v=20261122b" type="image/webp" />
+                          <source srcset="/assets/img/running-race-2.webp" type="image/webp" />
                           <img
-                            src="/assets/img/running-race-2.jpg?v=20261122b"
+                            src="/assets/img/running-race-2.jpg"
                             width="640"
                             height="426"
                             loading="lazy"
@@ -484,11 +484,11 @@
                 <picture>
                   <source
                     type="image/webp"
-                    srcset="/assets/img/sections/art-sm.webp?v=20261122 960w, /assets/img/sections/art.webp?v=20261122 1600w"
+                    srcset="/assets/img/sections/art-sm.webp 960w, /assets/img/sections/art.webp 1600w"
                     sizes="(min-width: 900px) 58vw, 100vw"
                   />
                   <img
-                    src="/assets/img/sections/art.webp?v=20261122"
+                    src="/assets/img/sections/art.webp"
                     width="1600"
                     height="1200"
                     loading="lazy"
@@ -609,6 +609,6 @@
       </section>
     </main>
 
-    <script type="module" src="/assets/js/main.js?v=20261123"></script>
+    <script type="module" src="/assets/js/main.js"></script>
   </body>
 </html>
