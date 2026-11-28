@@ -27,7 +27,7 @@
 
 /* =========================================================================
    RUN WITH THE WIND — STANDALONE DESIGN TOKENS (Dawn Air / Pre-Dawn Track)
-   Derived from /assets/img/run-with-the-wind-logo.webp (#F03010, #4B0802, #010000)
+   Derived from /assets/img/run-with-the-wind-logo.webp (#FC4C02, #000000)
    ========================================================================= */
 :root {
   color-scheme: light dark;
@@ -42,21 +42,21 @@
   --ink-secondary: #3e4857;
   --ink-muted: #556173;
 
-  --brand: #c92409;
-  --brand-hover: #a81c06;
-  --brand-mark: #f03010;
-  --brand-tint: #fceae6;
+  --brand: #c23a00;
+  --brand-hover: #a33000;
+  --brand-mark: #fc4c02;
+  --brand-tint: #fff0e8;
   --on-brand: #ffffff;
-  --hero-glow: radial-gradient(ellipse 72% 60% at 78% 12%, rgba(240, 48, 16, 0.09), transparent 70%);
+  --hero-glow: radial-gradient(ellipse 72% 60% at 78% 12%, rgba(252, 76, 2, 0.1), transparent 70%);
   --wind-stroke: rgba(17, 22, 31, 0.07);
 
   /* Status tokens (paired always with explicit text) */
   --st-avail-bg: #e5f5ec;
   --st-avail-ink: #0f5b35;
   --st-avail-bd: #b6dfc8;
-  --st-prog-bg: #fdece8;
-  --st-prog-ink: #9e1f09;
-  --st-prog-bd: #f5c2b7;
+  --st-prog-bg: #fff0e8;
+  --st-prog-ink: #a83200;
+  --st-prog-bd: #f7c9b2;
   --st-plan-bg: #eceff4;
   --st-plan-ink: #414d5e;
   --st-plan-bd: #cfd7e2;
@@ -87,18 +87,18 @@
     --ink-secondary: #b7c1d1;
     --ink-muted: #8b98ad;
 
-    --brand: #ff6847;
-    --brand-hover: #ff7e62;
-    --brand-tint: #2a1412;
-    --hero-glow: radial-gradient(ellipse 72% 60% at 78% 12%, rgba(240, 48, 16, 0.16), transparent 70%);
+    --brand: #ff7438;
+    --brand-hover: #ff8d5c;
+    --brand-tint: #2b170e;
+    --hero-glow: radial-gradient(ellipse 72% 60% at 78% 12%, rgba(252, 76, 2, 0.17), transparent 70%);
     --wind-stroke: rgba(242, 245, 250, 0.06);
 
     --st-avail-bg: #102a1e;
     --st-avail-ink: #6fe3a8;
     --st-avail-bd: #1e543b;
-    --st-prog-bg: #2e1511;
-    --st-prog-ink: #ff8c73;
-    --st-prog-bd: #5c281e;
+    --st-prog-bg: #2e180e;
+    --st-prog-ink: #ff9466;
+    --st-prog-bd: #5e2e16;
     --st-plan-bg: #1a2230;
     --st-plan-ink: #b3c0d4;
     --st-plan-bd: #313e54;
@@ -117,18 +117,18 @@
   --ink-secondary: #b7c1d1;
   --ink-muted: #8b98ad;
 
-  --brand: #ff6847;
-  --brand-hover: #ff7e62;
-  --brand-tint: #2a1412;
-  --hero-glow: radial-gradient(ellipse 72% 60% at 78% 12%, rgba(240, 48, 16, 0.16), transparent 70%);
+  --brand: #ff7438;
+  --brand-hover: #ff8d5c;
+  --brand-tint: #2b170e;
+  --hero-glow: radial-gradient(ellipse 72% 60% at 78% 12%, rgba(252, 76, 2, 0.17), transparent 70%);
   --wind-stroke: rgba(242, 245, 250, 0.06);
 
   --st-avail-bg: #102a1e;
   --st-avail-ink: #6fe3a8;
   --st-avail-bd: #1e543b;
-  --st-prog-bg: #2e1511;
-  --st-prog-ink: #ff8c73;
-  --st-prog-bd: #5c281e;
+  --st-prog-bg: #2e180e;
+  --st-prog-ink: #ff9466;
+  --st-prog-bd: #5e2e16;
   --st-plan-bg: #1a2230;
   --st-plan-ink: #b3c0d4;
   --st-plan-bd: #313e54;
@@ -398,14 +398,14 @@ html.js .no-js-only {
 }
 
 .btn-primary {
-  background: #c92409;
+  background: #c23a00;
   color: var(--on-brand);
-  border: 1px solid #c92409;
+  border: 1px solid #c23a00;
 }
 
 .btn-primary:hover {
-  background: #a81c06;
-  border-color: #a81c06;
+  background: #a33000;
+  border-color: #a33000;
 }
 
 .btn-secondary {
